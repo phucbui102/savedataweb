@@ -1,0 +1,12 @@
+.box-content .pay_ {
+    display: flex;
+   align-items: center;
+   margin: 20px 0;
+}
+
+.box-content .pay_ a{
+    border: 1px solid #379237;
+    padding: 10px;
+
+}
+

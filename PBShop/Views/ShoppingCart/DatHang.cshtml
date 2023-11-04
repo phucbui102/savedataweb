@@ -1,0 +1,221 @@
+﻿﻿﻿@using PBShop.Models;
+@model List<ProductModel>
+@*@model  PBShop.Models.Product*@
+@{
+    ViewBag.Title = "DatHang";
+    Layout = "~/Views/Shared/PBShopHome_Layout.cshtml";
+}
+
+<!--Navigation section-->
+<div class="container">
+    <nav class="biolife-nav">
+        <ul>
+            <li class="nav-item">
+                <a href="index-2.html" class="permal-link">Home</a>
+            </li>
+            <li class="nav-item">
+                <span class="current-page">ShoppingCart</span>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+<div class="page-contain checkout">
+    <!-- Main content -->
+    <div id="main-content" class="main-content">
+        <div class="container sm-margin-top-37px">
+            <div class="row">
+                <!--checkout progress box-->
+                <div class="col-lg-7 col-md-7 col-sm-6 col-xs-12">
+                    <div class="checkout-progress-wrap">
+                        <ul class="steps">
+                            <li class="step 1st">
+                                <div class="checkout-act active">
+                                    <h3 class="title-box">
+                                        <span class="number"><i class="fa-solid fa-location-dot"></i></span>Địa Chỉ Nhận Hàng
+                                    </h3>
+                                    <div class="box-content">
+                                        <p class="txt-desc">
+                                            <span style="
+                              padding-right: 10px;
+                              font-size: 18px;
+                              color: #111111;
+                              font-weight: 700;
+                            ">Bùi vinh phuc</span>0886663537
+                                        </p>
+                                        <p class="txt-desc">
+                                            Cổng 1 Đại Học Thủ Dầu Một, Trần Văn Ơn, Phường Phú
+                                            Hòa, Thành Phố Thủ Dầu Một, Bình Dương
+                                        </p>
+
+                                        <button type="submit" name="btn-sbmt" class="btn">
+                                            Chỉnh Sửa
+                                        </button>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="step 2nd">
+                                <div class="checkout-act">
+                                    <h3 class="title-box">
+                                        <span class="number" style="background-color: #379237">
+                                            <i class="fa-solid fa-hand-holding-dollar"
+                                               style="color: #ffffff"></i>
+                                        </span>phương thức thanh toán
+                                    </h3>
+                                    <div class="box-content">
+                                        <div class="pay_">
+                                            <a href="#" class="">
+                                                <img src="~/Theme/assets/images/card1.jpg"
+                                                     width="51"
+                                                     height="36"
+                                                     alt="" />Thanh toán khi nhận hàng
+                                            </a>
+
+                                            <!-- <li>
+                                                <a href="#" class="payment-link"
+                                                  ><img
+                                                    src="assets/images/card2.jpg"
+                                                    width="51"
+                                                    height="36"
+                                                    alt=""
+                                                /></a>
+                                              </li>
+                                              <li>
+                                                <a href="#" class="payment-link"
+                                                  ><img
+                                                    src="assets/images/card3.jpg"
+                                                    width="51"
+                                                    height="36"
+                                                    alt=""
+                                                /></a>
+                                              </li>
+                                              <li>
+                                                <a href="#" class="payment-link"
+                                                  ><img
+                                                    src="assets/images/card4.jpg"
+                                                    width="51"
+                                                    height="36"
+                                                    alt=""
+                                                /></a>
+                                              </li> -->
+                                        </div>
+                                        <button type="submit" name="btn-sbmt" class="btn" id="btn_edit">
+                                            Chỉnh Sửa
+                                        </button>
+                                    </div>
+                                </div>
+                            </li>
+                            <!-- <li class="step 3rd">
+                                              <div class="checkout-act"><h3 class="title-box"><span class="number">3</span>Billing</h3></div>
+                                          </li>
+                                          <li class="step 4th">
+                                              <div class="checkout-act"><h3 class="title-box"><span class="number">4</span>Payment</h3></div>
+                                          </li> -->
+                        </ul>
+                    </div>
+                </div>
+
+                <!--Order Summary-->
+                <div class="col-lg-5 col-md-5 col-sm-6 col-xs-12 sm-padding-top-48px sm-margin-bottom-0 xs-margin-bottom-15px">
+                    <div class="order-summary sm-margin-bottom-80px">
+                        <div class="title-block">
+                            <h3 class="title">Đơn Hàng</h3>
+                            <a href="@Url.Action("ShopCart","ShoppingCart")" class="link-forward">Chỉnh Sửa</a>
+                        </div>
+                        <div class="cart-list-box short-type">
+                            <span class="number">@Model.Count() Sản Phẩm</span>
+                            <ul class="cart-list" id="testhehe">
+                                @foreach (var item in Model)
+                                {
+                                    <li class="cart-elem">
+                                        <div class="cart-item">
+                                            <div class="product-thumb">
+                                                <a class="prd-thumb" href="#">
+                                                    <figure>
+                                                        <img src="~/Theme/assets/images/products/@item.AnhBiaP"
+                                                             width="113"
+                                                             height="113"
+                                                             alt="shop-cart" />
+                                                    </figure>
+                                                </a>
+                                            </div>
+                                            <div class="info">
+                                                <span class="txt-quantity">1X</span>
+                                                <a href="#" class="pr-name">@item.NameP</a>
+                                            </div>
+                                            <div class="price price-contain">
+                                                <ins>
+                                                    <span class="price-amount"><span class="currencySymbol">₫</span>85.00</span>
+                                                </ins>
+                                                <del>
+                                                    <span class="price-amount"><span class="currencySymbol">₫</span>95.00</span>
+                                                </del>
+                                            </div>
+                                        </div>
+                                    </li>
+                                }
+
+
+                            </ul>
+                            <ul class="subtotal">
+                                <li>
+                                    <div class="subtotal-line">
+                                        <b class="stt-name">Tạm Tính</b>
+                                        <span class="stt-price">₫170.00</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="subtotal-line">
+                                        <b class="stt-name">Phí Vận Chuyển</b>
+                                        <span class="stt-price">₫20.00</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="subtotal-line">
+                                        <b class="stt-name">Tax</b>
+                                        <span class="stt-price">₫0.00</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="subtotal-line">
+                                        <a href="#" class="link-forward">Voucher</a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="subtotal-line">
+                                        <b class="stt-name">Tổng Thanh Toán:</b>
+                                        <span class="stt-price">₫190.00</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="btn-checkout">
+                                        <a href="@Url.Action("Dat","ShoppingCart")" class="btn checkout">Thanh Toán</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*@section Scripts{
+    <script type="text/javascript" src="~/js/jquery.min.js"></script>
+    <script>
+        $('#btn_edit').click(function () {
+
+            $.ajax({
+            url: '@Url.Action("Search", "YourController")',
+            type: 'GET',
+            data: { searchTerm: searchTerm },
+            success: function (data) {
+                $('#searchResults').html(data);
+            }
+        });
+        });
+
+
+    </script>
+}*@
