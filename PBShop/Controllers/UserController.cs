@@ -17,6 +17,94 @@ namespace PBShop.Controllers
             return View();
         }
 
+
+        [HttpGet]
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Login(FormCollection collection)
+        {
+            var sEmail = collection["Email"];
+            var sPassword = collection["Password"];
+            if (String.IsNullOrEmpty(sEmail))
+            {
+                ViewData["err1"] = "Bạn chưa nhập Email";
+            }
+            else if (String.IsNullOrEmpty(sPassword))
+            {
+                ViewData["err2"] = "Bạn chưa nhập mật khẩu";
+            }
+            else
+            {
+                Customer kh = db.Customers.SingleOrDefault(n => n.Email == sEmail && n.Password == sPassword);
+                if (kh != null)
+                {
+
+                    Session["NameCustomers"] = kh.Name;
+                    Session["Customers"] = kh;
+                    ViewBag.ThongBao = "Chúc mừng đăng nhập thành công";
+                    return RedirectToAction("Index","PBSopHome");
+                }
+                else
+                {
+                    ViewBag.ThongBao = "Tên đăng nhập hoặc mật khẩu không đúng";
+                }
+            }
+            return View();
+        }
+
+        public ActionResult Logout()
+        {
+            if (Session["Customers"] != null)
+            {
+                Session["NameCustomers"] = null;
+                Session["Customers"] = null;
+            }    
+            return RedirectToAction("Index","PBSopHome");
+        }
+
+        [HttpGet]
+        public ActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Register(FormCollection collection, Customer kh)
+        {
+
+            var sHoTen = collection["Name"];
+            var sMatKhau = collection["Password"];
+            var sEmail = collection["Email"];
+            if (String.IsNullOrEmpty(sHoTen))
+            {
+                ViewData["err1"] = "Họ tên không được rỗng";
+            }
+            else if (String.IsNullOrEmpty(sMatKhau))
+            {
+                ViewData["err3"] = "Phải nhập mật khẩu";
+            }
+            else if (String.IsNullOrEmpty(sEmail))
+            {
+                ViewData["err5"] = "Email không được rỗng";
+            }
+            else
+            {
+                kh.Name = sHoTen;
+                kh.Password = sMatKhau.ToString();
+                kh.Email = sEmail.ToString();
+                db.Configuration.ValidateOnSaveEnabled = false;
+                db.Customers.Add(kh);
+                db.SaveChanges();
+                return RedirectToAction("Login");
+            }
+
+            return this.Register();
+        }
+
         [HttpGet]
         public ActionResult ResetPW()
         {

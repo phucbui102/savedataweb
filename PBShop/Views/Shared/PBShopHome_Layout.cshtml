@@ -121,17 +121,20 @@
                                 <!-- <option value="jp">Japan (JPY)</option> -->
                             </select>
                         </li>
-                        <li>
-                            @if (Session["NameCustomers"] != null)
+                        <li class="Login_Container">
+                            @if (Session["Customers"] != null)
                             {
                                 <a href="login.html" class="login-link">
                                     <i class="biolife-icon icon-login">
                                     </i>@Session["NameCustomers"].ToString()
                                 </a>
+
+                                Html.RenderPartial("_PartialLogout");
+
                             }
                             else
                             {
-                                <a href="@Url.Action("Login","PBSopHome")" class="login-link">
+                                <a href="@Url.Action("Login","User")" class="login-link">
                                     <i class="biolife-icon icon-login">
                                     </i>Đăng Nhập/Đăng Ký
                                 </a>
@@ -762,7 +765,27 @@
             </div>
         </div>
     </header>
-
+    <!-- Modal -->
+    <div class="modal fade" id="BtnPay" role="dialog">
+        <div class="modal-dialog modal-dialog-centered">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <!-- <button type="button" class="close" data-dismiss="modal">×</button> -->
+                    <h4 class="modal-title">Thông Báo</h4>
+                </div>
+                <div class="modal-body" style="display:flex ; align-items: center">
+                    <i class="fa-solid fa-circle-check" style="color: #18c935; margin-right:5px"></i>
+                    <p style="margin:0">Thanh Toán Thành Công.</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="@Url.Action("Dat","ShoppingCart")" class="btn btn-default" @*data-dismiss="modal"*@>
+                        OK
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Page Contain -->
     <div class="page-contain">
         <!-- Main content -->

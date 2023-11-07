@@ -9,8 +9,8 @@
     <Property Name="Password" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
     <Property Name="Phone" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <NavigationProperty Name="ShoppingCarts" Relationship="PBShopModel.FK_ShoppingCart_Customer" FromRole="Customer" ToRole="ShoppingCart" />
-    <NavigationProperty Name="DONDATHANGs" Relationship="PBShopModel.FK_DONDATHANG_Customer" FromRole="Customer" ToRole="DONDATHANG" />
+    <NavigationProperty Name="ShoppingCarts" Relationship="Self.FK_ShoppingCart_Customer" FromRole="Customer" ToRole="ShoppingCart" />
+    <NavigationProperty Name="Orders" Relationship="PBShopModel.FK_Order_Customer" FromRole="Customer" ToRole="Order" />
   </EntityType>
   <EntityType Name="Product">
     <Key>
@@ -44,8 +44,18 @@
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
     <Property Name="IdCustomer" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Customer" Relationship="Self.FK_ShoppingCart_Customer" FromRole="ShoppingCart" ToRole="Customer" />
     <NavigationProperty Name="ShoppingCartDetails" Relationship="Self.FK_ShoppingCartDetails_ShoppingCart" FromRole="ShoppingCart" ToRole="ShoppingCartDetails" />
-    <NavigationProperty Name="Customer" Relationship="PBShopModel.FK_ShoppingCart_Customer" FromRole="ShoppingCart" ToRole="Customer" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
   <EntityType Name="Type">
     <Key>
@@ -76,6 +86,18 @@
     <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
     <NavigationProperty Name="Type" Relationship="Self.FK_Type_Details_Type" FromRole="Type_Details" ToRole="Type" />
   </EntityType>
+  <Association Name="FK_ShoppingCart_Customer">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+    <End Role="ShoppingCart" Type="Self.ShoppingCart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ShoppingCart">
+        <PropertyRef Name="IdCustomer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Product_Promotion">
     <End Role="Promotion" Type="Self.Promotion" Multiplicity="1" />
     <End Role="Product" Type="Self.Product" Multiplicity="*" />
@@ -141,9 +163,14 @@
     <EntitySet Name="Products" EntityType="Self.Product" />
     <EntitySet Name="Promotions" EntityType="Self.Promotion" />
     <EntitySet Name="ShoppingCarts" EntityType="Self.ShoppingCart" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
     <EntitySet Name="Types" EntityType="Self.Type" />
     <EntitySet Name="ShoppingCartDetails" EntityType="Self.ShoppingCartDetail" />
     <EntitySet Name="Type_Details" EntityType="Self.Type_Details" />
+    <AssociationSet Name="FK_ShoppingCart_Customer" Association="Self.FK_ShoppingCart_Customer">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="ShoppingCart" EntitySet="ShoppingCarts" />
+    </AssociationSet>
     <AssociationSet Name="FK_Product_Promotion" Association="Self.FK_Product_Promotion">
       <End Role="Promotion" EntitySet="Promotions" />
       <End Role="Product" EntitySet="Products" />
@@ -164,60 +191,32 @@
       <End Role="Type" EntitySet="Types" />
       <End Role="Type_Details" EntitySet="Type_Details" />
     </AssociationSet>
-    <EntitySet Name="DONDATHANGs" EntityType="PBShopModel.DONDATHANG" />
-    <AssociationSet Name="FK_ShoppingCart_Customer" Association="PBShopModel.FK_ShoppingCart_Customer">
+    <EntitySet Name="Orders" EntityType="PBShopModel.Order" />
+    <AssociationSet Name="FK_Order_Customer" Association="PBShopModel.FK_Order_Customer">
       <End Role="Customer" EntitySet="Customers" />
-      <End Role="ShoppingCart" EntitySet="ShoppingCarts" />
-    </AssociationSet>
-    <EntitySet Name="sysdiagrams" EntityType="PBShopModel.sysdiagram" />
-    <AssociationSet Name="FK_DONDATHANG_Customer" Association="PBShopModel.FK_DONDATHANG_Customer">
-      <End Role="Customer" EntitySet="Customers" />
-      <End Role="DONDATHANG" EntitySet="DONDATHANGs" />
+      <End Role="Order" EntitySet="Orders" />
     </AssociationSet>
   </EntityContainer>
-  <EntityType Name="DONDATHANG">
+  <EntityType Name="Order">
     <Key>
-      <PropertyRef Name="MaKH" />
       <PropertyRef Name="SoDH" />
     </Key>
-    <Property Name="MaKH" Type="Int32" />
+    <Property Name="MaKH" Type="Int32" Nullable="false" />
     <Property Name="NgayDH" Type="DateTime" Precision="3" />
     <Property Name="NgayGiaoHang" Type="DateTime" Precision="3" />
     <Property Name="HTGiaoHang" Type="Boolean" />
     <Property Name="HTThanhToan" Type="Boolean" />
-    <Property Name="SoDH" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Customer" Relationship="PBShopModel.FK_DONDATHANG_Customer" FromRole="DONDATHANG" ToRole="Customer" />
+    <Property Name="SoDH" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="Customer" Relationship="PBShopModel.FK_Order_Customer" FromRole="Order" ToRole="Customer" />
   </EntityType>
-  <Association Name="FK_ShoppingCart_Customer">
+  <Association Name="FK_Order_Customer">
     <End Type="PBShopModel.Customer" Role="Customer" Multiplicity="1" />
-    <End Type="PBShopModel.ShoppingCart" Role="ShoppingCart" Multiplicity="*" />
+    <End Type="PBShopModel.Order" Role="Order" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Customer">
         <PropertyRef Name="ID" />
       </Principal>
-      <Dependent Role="ShoppingCart">
-        <PropertyRef Name="IdCustomer" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <EntityType Name="sysdiagram">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="principal_id" Type="Int32" Nullable="false" />
-    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="version" Type="Int32" />
-    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-  </EntityType>
-  <Association Name="FK_DONDATHANG_Customer">
-    <End Type="PBShopModel.Customer" Role="Customer" Multiplicity="1" />
-    <End Type="PBShopModel.DONDATHANG" Role="DONDATHANG" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Customer">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="DONDATHANG">
+      <Dependent Role="Order">
         <PropertyRef Name="MaKH" />
       </Dependent>
     </ReferentialConstraint>

@@ -81,9 +81,9 @@ C:\Users\1002b\source\repos\PBShop\PBShop\bin\EntityFramework.SqlServer.dll
 C:\Users\1002b\source\repos\PBShop\PBShop\bin\EntityFramework.xml
 C:\Users\1002b\source\repos\PBShop\PBShop\bin\EntityFramework.SqlServer.xml
 C:\Users\1002b\source\repos\PBShop\PBShop\bin\BeginCollectionItem.dll
-C:\Users\1002b\source\repos\PBShop\PBShop\obj\Debug\PBShop.csproj.AssemblyReference.cache
 C:\Users\1002b\source\repos\PBShop\PBShop\bin\PagedList.dll
 C:\Users\1002b\source\repos\PBShop\PBShop\bin\PagedList.Mvc.dll
 C:\Users\1002b\source\repos\PBShop\PBShop\bin\PagedList.xml
 C:\Users\1002b\source\repos\PBShop\PBShop\bin\PagedList.Mvc.xml
 C:\Users\1002b\source\repos\PBShop\PBShop\bin\System.Linq.Dynamic.dll
+C:\Users\1002b\source\repos\PBShop\PBShop\obj\Debug\PBShop.csproj.AssemblyReference.cache

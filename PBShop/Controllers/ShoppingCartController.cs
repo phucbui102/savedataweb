@@ -201,8 +201,7 @@ namespace PBShop.Controllers
            
 
 
-            //ViewBag.TongSoLuong = TongSoLuong();
-            //ViewBag.TongTien = TongTien();
+            
             return View("DatHang",lstSPThanhToan);
         }
         [HttpGet]
@@ -212,21 +211,27 @@ namespace PBShop.Controllers
             return View(lstSPThanhToan);
         }
 
-        [HttpPost]
+        //[HttpGet]
+        //public ActionResult Dat()
+        //{
+        //    return View();
+        //}
+
+        //[HttpPost]
         public ActionResult Dat()
         {
-            DONDATHANG ddh = new DONDATHANG();
+            Order order = new Order();
             Customer kh = (Customer)Session["Customers"];
-            //List<ProductModel> lstGioHang = LayGioHang();
-            //ddh.MaKH = 1;
-            ddh.NgayDH = DateTime.Now;
+            List<ProductModel> lstGioHang = LayGioHang();
+            order.MaKH = kh.ID;
+            order.NgayDH = DateTime.Now;
             var NgayGiao = DateTime.Now;
-            ddh.NgayGiaoHang = NgayGiao;
-            ddh.HTGiaoHang = true;
-            ddh.HTThanhToan = false;
+            order.NgayGiaoHang = NgayGiao;
+            order.HTGiaoHang = true;
+            order.HTThanhToan = false;
             //db.DONDATHANGs.InsertOnSubmit(ddh);
             //db.SubmitChanges();
-            db.DONDATHANGs.Add(ddh);
+            db.Orders.Add(order);
             db.SaveChanges();
             //foreach (var item in lstGioHang)
             //{
@@ -238,9 +243,12 @@ namespace PBShop.Controllers
             //    db.CTDATHANGs.InsertOnSubmit(ctdh);
             //}
             //db.SubmitChanges();
-            Session["DSThanhToan"] = null;
-            return View();
+            Session["GioHang"] = null;
+            ViewBag.mess = "Đặt Hàng Thành công";
+            return RedirectToAction("Index","PBSopHome");
+           
         }
+
 
         //[HttpPost]
         //public ActionResult DatHang(FormCollection f)

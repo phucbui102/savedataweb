@@ -6,6 +6,7 @@
     Layout = "~/Views/Shared/PBShopHome_Layout.cshtml";
 }
 
+
 <!--Navigation section-->
 <div class="container">
     <nav class="biolife-nav">
@@ -188,9 +189,22 @@
                                     </div>
                                 </li>
                                 <li>
-                                    <div class="btn-checkout">
-                                        <a href="@Url.Action("Dat","ShoppingCart")" class="btn checkout">Thanh Toán</a>
-                                    </div>
+                                    <!--<div class="btn-checkout">-->
+                                    @*@Url.Action("Dat", "ShoppingCart")*@
+                                    <!--<a href="#" class="btn checkout" id="myBtn3">Thanh Toán</a>
+    </div>-->
+                                    <!-- Button trigger modal -->
+                                    <button type="button"
+                                            class="btn btn-submit btn-bold BtnPay"
+                                            data-toggle="modal"
+                                            data-target="#BtnPay"
+                                            data-backdrop="static"
+                                            style="width:100%"
+                                            >
+                                            
+                                       Thanh Toán
+                                    </button>
+
                                 </li>
                             </ul>
                         </div>
@@ -201,21 +215,23 @@
     </div>
 </div>
 
+
+
 @*@section Scripts{
-    <script type="text/javascript" src="~/js/jquery.min.js"></script>
-    <script>
-        $('#btn_edit').click(function () {
+        <script type="text/javascript" src="~/js/jquery.min.js"></script>
+        <script>
+            $('#btn_edit').click(function () {
 
-            $.ajax({
-            url: '@Url.Action("Search", "YourController")',
-            type: 'GET',
-            data: { searchTerm: searchTerm },
-            success: function (data) {
-                $('#searchResults').html(data);
-            }
-        });
-        });
+                $.ajax({
+                url: '@Url.Action("Search", "YourController")',
+                type: 'GET',
+                data: { searchTerm: searchTerm },
+                success: function (data) {
+                    $('#searchResults').html(data);
+                }
+            });
+            });
 
 
-    </script>
-}*@
+        </script>
+    }*@

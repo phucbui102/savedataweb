@@ -44,6 +44,17 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="PBShopModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Types">
       <EntityTypeMapping TypeName="PBShopModel.Type">
         <MappingFragment StoreEntitySet="Type">
@@ -69,14 +80,15 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="sysdiagrams">
-      <EntityTypeMapping TypeName="PBShopModel.sysdiagram">
-        <MappingFragment StoreEntitySet="sysdiagrams">
-          <ScalarProperty Name="definition" ColumnName="definition" />
-          <ScalarProperty Name="version" ColumnName="version" />
-          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-          <ScalarProperty Name="name" ColumnName="name" />
+    <EntitySetMapping Name="Orders">
+      <EntityTypeMapping TypeName="PBShopModel.Order">
+        <MappingFragment StoreEntitySet="Order">
+          <ScalarProperty Name="SoDH" ColumnName="SoDH" />
+          <ScalarProperty Name="HTThanhToan" ColumnName="HTThanhToan" />
+          <ScalarProperty Name="HTGiaoHang" ColumnName="HTGiaoHang" />
+          <ScalarProperty Name="NgayGiaoHang" ColumnName="NgayGiaoHang" />
+          <ScalarProperty Name="NgayDH" ColumnName="NgayDH" />
+          <ScalarProperty Name="MaKH" ColumnName="MaKH" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
