@@ -1,4 +1,4 @@
-﻿﻿@model IEnumerable<PBShop.Models.Product>
+﻿﻿﻿@model IEnumerable<PBShop.Models.GetProduct>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/PBShopHome_Layout.cshtml";
@@ -20,7 +20,7 @@
                         </span>
                     </div>
                     <div class="wrap-menu">
-                        @Html.Action("PartialMenu","PBSopHome")
+                        @Html.Action("PartialMenu", "PBSopHome")
                     </div>
                 </div>
             </div>
@@ -29,70 +29,27 @@
             <div class="main-slide block-slider nav-change type02">
                 <ul class="biolife-carousel"
                     data-slick='{"arrows": true, "dots": false, "slidesMargin": 0, "slidesToShow": 1, "infinite": true, "speed": 800}'>
-                    <li>
-                        <div class="slide-contain slider-opt04__layout01">
-                            <div class="media"></div>
-                            <div class="text-content">
-                                <i class="first-line">Pomegranate</i>
-                                <h3 class="second-line">Fresh Juice 100% Organic</h3>
-                                <p class="third-line">
-                                    A blend of freshly squeezed green apple & fruits
-                                </p>
-                                <p class="buttons">
-                                    <a href="#" class="btn btn-bold">Shop now</a>
-                                    <a href="#" class="btn btn-thin">View lookbook</a>
-                                </p>
+
+
+                    @for (int i = 0; i < 5; i++)
+                    {
+                        <li>
+                            <div class="slide-contain slider-opt04__layout01">
+                                <div class="media"></div>
+                                <div class="text-content">
+                                    <p class="first-line">Nước trái cây</p>
+                                    <h3 class="second-line" style="font-size: 45px;">Mua 2 tính tiền 1</h3>
+                                    @*<p class="third-line">
+                                            A blend of freshly squeezed green apple & fruits
+                                        </p>*@
+                                    <p class="buttons">
+                                        <a href="#" class="btn btn-bold">Xem chi tiết</a>
+                                        @*<a href="#" class="btn btn-thin">View lookbook</a>*@
+                                    </p>
+                                </div>
                             </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="slide-contain slider-opt04__layout01">
-                            <div class="media"></div>
-                            <div class="text-content">
-                                <i class="first-line">Pomegranate</i>
-                                <h3 class="second-line">Fresh Juice 100% Organic</h3>
-                                <p class="third-line">
-                                    A blend of freshly squeezed green apple & fruits
-                                </p>
-                                <p class="buttons">
-                                    <a href="#" class="btn btn-bold">Shop now</a>
-                                    <a href="#" class="btn btn-thin">View lookbook</a>
-                                </p>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="slide-contain slider-opt04__layout01">
-                            <div class="media"></div>
-                            <div class="text-content">
-                                <i class="first-line">Pomegranate</i>
-                                <h3 class="second-line">Fresh Juice 100% Organic</h3>
-                                <p class="third-line">
-                                    A blend of freshly squeezed green apple & fruits
-                                </p>
-                                <p class="buttons">
-                                    <a href="#" class="btn btn-bold">Shop now</a>
-                                    <a href="#" class="btn btn-thin">View lookbook</a>
-                                </p>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="slide-contain slider-opt04__layout01">
-                            <div class="media"></div>
-                            <div class="text-content">
-                                <i class="first-line">Pomegranate</i>
-                                <h3 class="second-line">Fresh Juice 100% Organic</h3>
-                                <p class="third-line">
-                                    A blend of freshly squeezed green apple & fruits
-                                </p>
-                                <p class="buttons">
-                                    <a href="#" class="btn btn-bold">Shop now</a>
-                                    <a href="#" class="btn btn-thin">View lookbook</a>
-                                </p>
-                            </div>
-                        </div>
-                    </li>
+                        </li>
+                    }
                 </ul>
             </div>
         </div>
@@ -104,20 +61,79 @@
     <div class="container">
         <ul class="biolife-carousel nav-center-bold nav-none-on-mobile"
             data-slick='{"rows":1,"arrows":true,"dots":false,"infinite":false,"speed":400,"slidesMargin":30,"slidesToShow":3, "responsive":[{"breakpoint":1200, "settings":{ "slidesToShow": 3}},{"breakpoint":992, "settings":{ "slidesToShow": 2}},{"breakpoint":768, "settings":{ "slidesToShow": 2}}, {"breakpoint":500, "settings":{ "slidesToShow": 1}}]}'>
+
             <li>
-                <div class="biolife-banner style-02 biolife-banner__style-02">
+                <div class="biolife-banner style-03 biolife-banner__style-03">
                     <div class="banner-contain">
                         <div class="media">
                             <a href="#" class="bn-link">
-                                <img src="assets/images/home-04/bn_style02-child.png"
-                                     width="231"
-                                     height="208"
+                                <img src="~/Theme/assets/images/home-04/bn_style03-child.png"
+                                     width="218"
+                                     height="205"
                                      alt="" />
                             </a>
                         </div>
                         <div class="text-content">
-                            <span class="text1">Sumer Fruit</span>
-                            <b class="text2">100% Pure Natural Fruit Juice</b>
+                            <span class="text1">Rau củ</span>
+                            <b class="text2">Giảm 30%</b>
+                            <span class="text3">sau 20h</span>
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+            <li>
+                <div class="biolife-banner style-04 biolife-banner__style-04 biolife-banner__style-edit">
+                    <div class="banner-contain">
+                        <div class="media">
+                            <a href="#" class="bn-link">
+                                <img src="~/Theme/assets/images/home-04/bn_style04-child.png"
+                                     width="135"
+                                     height="206"
+                                     alt="" />
+                            </a>
+                        </div>
+                        <div class="text-content">
+                            <span class="text1">Sản phẩm đóng gói</span>
+                            <p class="text2">Giảm<span>25%</span></p>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="biolife-banner style-03 biolife-banner__style-03" style="background-color: #c4a8d5">
+                    <div class="banner-contain">
+                        <div class="media">
+                            <a href="#" class="bn-link">
+                                @*<img src="~/Theme/assets/images/home-04/bn_style03-child.png"
+                                     width="218"
+                                     height="205"
+                                     alt="" />*@
+                                <img src="~/Theme/assets/images/home-04/bn_style02-child.png" width="231" height="208" alt="">
+                            </a>
+                        </div>
+                        <div class="text-content">
+                            <span class="text1">Nước trái cây</span>
+                            <b class="text2">Giảm 15%</b>
+                            <span class="text3">@*sau 20h*@</span>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="biolife-banner style-04 biolife-banner__style-04 biolife-banner__style-edit">
+                    <div class="banner-contain">
+                        <div class="media">
+                            <a href="#" class="bn-link">
+                                <img src="~/Theme/assets/images/home-04/bn_style04-child.png"
+                                     width="135"
+                                     height="206"
+                                     alt="" />
+                            </a>
+                        </div>
+                        <div class="text-content">
+                            <span class="text1">Sản phẩm đóng gói</span>
+                            <p class="text2">Giảm<span>25%</span></p>
                         </div>
                     </div>
                 </div>
@@ -127,93 +143,21 @@
                     <div class="banner-contain">
                         <div class="media">
                             <a href="#" class="bn-link">
-                                <img src="assets/images/home-04/bn_style03-child.png"
+                                <img src="~/Theme/assets/images/home-04/bn_style03-child.png"
                                      width="218"
                                      height="205"
                                      alt="" />
                             </a>
                         </div>
                         <div class="text-content">
-                            <span class="text1">California</span>
-                            <b class="text2">Fresh Fruit</b>
-                            <span class="text3">Association</span>
+                            <span class="text1">Rau củ</span>
+                            <b class="text2">Giảm 30%</b>
+                            <span class="text3">sau 20h</span>
                         </div>
                     </div>
                 </div>
             </li>
-            <li>
-                <div class="biolife-banner style-04 biolife-banner__style-04">
-                    <div class="banner-contain">
-                        <div class="media">
-                            <a href="#" class="bn-link">
-                                <img src="assets/images/home-04/bn_style04-child.png"
-                                     width="135"
-                                     height="206"
-                                     alt="" />
-                            </a>
-                        </div>
-                        <div class="text-content">
-                            <span class="text1">Naturally fresh taste</span>
-                            <p class="text2">With <span>25% Off</span> All Teas</p>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="biolife-banner style-02 biolife-banner__style-02">
-                    <div class="banner-contain">
-                        <div class="media">
-                            <a href="#" class="bn-link">
-                                <img src="assets/images/home-04/bn_style02-child.png"
-                                     width="231"
-                                     height="208"
-                                     alt="" />
-                            </a>
-                        </div>
-                        <div class="text-content">
-                            <span class="text1">Sumer Fruit</span>
-                            <b class="text2">100% Pure Natural Fruit Juice</b>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="biolife-banner style-03 biolife-banner__style-03">
-                    <div class="banner-contain">
-                        <div class="media">
-                            <a href="#" class="bn-link">
-                                <img src="assets/images/home-04/bn_style03-child.png"
-                                     width="218"
-                                     height="205"
-                                     alt="" />
-                            </a>
-                        </div>
-                        <div class="text-content">
-                            <span class="text1">California</span>
-                            <b class="text2">Fresh Fruit</b>
-                            <span class="text3">Association</span>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="biolife-banner style-04 biolife-banner__style-04">
-                    <div class="banner-contain">
-                        <div class="media">
-                            <a href="#" class="bn-link">
-                                <img src="assets/images/home-04/bn_style04-child.png"
-                                     width="135"
-                                     height="206"
-                                     alt="" />
-                            </a>
-                        </div>
-                        <div class="text-content">
-                            <span class="text1">Naturally fresh taste</span>
-                            <p class="text2">With <span>25% Off</span> All Teas</p>
-                        </div>
-                    </div>
-                </div>
-            </li>
+                
         </ul>
     </div>
 </div>
@@ -434,7 +378,7 @@
                 <div id="tab02_1st" class="tab-contain active">
                     <ul class="products-list biolife-carousel nav-center-02 nav-none-on-mobile eq-height-contain"
                         data-slick='{"rows":2 ,"arrows":true,"dots":false,"infinite":true,"speed":400,"slidesMargin":10,"slidesToShow":4, "responsive":[{"breakpoint":1200, "settings":{ "slidesToShow": 4}},{"breakpoint":992, "settings":{ "slidesToShow": 3, "slidesMargin":20}},{"breakpoint":768, "settings":{ "slidesToShow": 2, "slidesMargin":15}}]}'>
-                        
+
                         @foreach (var item in ViewBag.NewProduct)
                         {
                             <li class="product-item">
@@ -447,9 +391,12 @@
                                                  height="270"
                                                  class="product-thumnail" />
                                         </a>
+                                        <div class="labels">
+                                            <span class="sale-label">-50%</span>
+                                        </div>
                                         @*<a class="lookup btn_call_quickview" href="@Url.Action("PartialProductDetails", "PBSopHome", new { ms = @item.ID })">
-                            <i class="biolife-icon icon-search"></i>
-                        </a>*@
+                                                <i class="biolife-icon icon-search"></i>
+                                            </a>*@
                                     </div>
                                     <div class="info">
                                         <b class="categories">@item.NameType</b>
@@ -459,20 +406,20 @@
                                         <div class="price">
                                             <ins>
                                                 <span class="price-amount">
-                                                    <span class="currencySymbol">£</span>85.00
+                                                    <span class="currencySymbol">₫</span>85.00
                                                 </span>
                                             </ins>
                                             <del>
                                                 <span class="price-amount">
-                                                    <span class="currencySymbol">£</span>95.00
+                                                    <span class="currencySymbol">₫</span>95.00
                                                 </span>
                                             </del>
                                         </div>
                                         <div class="slide-down-box">
                                             @*<p class="message">
-            All products are carefully selected to ensure food
-            safety.
-        </p>*@
+                                                    All products are carefully selected to ensure food
+                                                    safety.
+                                                </p>*@
 
                                             <div id="fb-root"></div>
                                             <script>
@@ -485,8 +432,7 @@
                                                 }(document, 'script', 'facebook-jssdk'));</script>
 
                                             <div class="fb-share-button"
-                                                 data-href="https://www.your-domain.com/your-page.html"
-                                                 >
+                                                 data-href="https://www.your-domain.com/your-page.html">
                                             </div>
                                             <div class="buttons">
                                                 <a href="#" class="btn wishlist-btn">
@@ -494,7 +440,7 @@
                                                 </a>
                                                 <a href="#" class="btn add-to-cart-btn">
                                                     <i class="fa fa-cart-arrow-down"
-                                                       aria-hidden="true"></i>add to cart
+                                                       aria-hidden="true"></i>Thêm Vào Giỏ Hàng
                                                 </a>
                                                 <a href="#" class="btn compare-btn">
                                                     <i class="fa fa-random" aria-hidden="true"></i>
@@ -523,9 +469,12 @@
                                                  height="270"
                                                  class="product-thumnail" />
                                         </a>
-                                        <a class="lookup btn_call_quickview" href="#">
-                                            <i class="biolife-icon icon-search"></i>
-                                        </a>
+                                        <div class="labels">
+                                            <span class="sale-label">-50%</span>
+                                        </div>
+                                        @*<a class="lookup btn_call_quickview" href="#">
+                                                <i class="biolife-icon icon-search"></i>
+                                            </a>*@
                                     </div>
                                     <div class="info">
                                         <b class="categories">@item.NameType</b>
@@ -535,27 +484,27 @@
                                         <div class="price">
                                             <ins>
                                                 <span class="price-amount">
-                                                    <span class="currencySymbol">£</span>85.00
+                                                    <span class="currencySymbol">₫</span>85.00
                                                 </span>
                                             </ins>
                                             <del>
                                                 <span class="price-amount">
-                                                    <span class="currencySymbol">£</span>95.00
+                                                    <span class="currencySymbol">₫</span>95.00
                                                 </span>
                                             </del>
                                         </div>
                                         <div class="slide-down-box">
                                             @*<p class="message">
-                                                All products are carefully selected to ensure food
-                                                safety.
-                                            </p>*@
+                                                    All products are carefully selected to ensure food
+                                                    safety.
+                                                </p>*@
                                             <div class="buttons">
                                                 <a href="#" class="btn wishlist-btn">
                                                     <i class="fa fa-heart" aria-hidden="true"></i>
                                                 </a>
                                                 <a href="#" class="btn add-to-cart-btn">
                                                     <i class="fa fa-cart-arrow-down"
-                                                       aria-hidden="true"></i>add to cart
+                                                       aria-hidden="true"></i>Thêm Vào Giỏ Hàng
                                                 </a>
                                                 <a href="#" class="btn compare-btn">
                                                     <i class="fa fa-random" aria-hidden="true"></i>
@@ -583,9 +532,12 @@
                                                  height="270"
                                                  class="product-thumnail" />
                                         </a>
-                                        <a class="lookup btn_call_quickview" href="#">
-                                            <i class="biolife-icon icon-search"></i>
-                                        </a>
+                                        <div class="labels">
+                                            <span class="sale-label">-50%</span>
+                                        </div>
+                                        @*<a class="lookup btn_call_quickview" href="#">
+                                                <i class="biolife-icon icon-search"></i>
+                                            </a>*@
                                     </div>
                                     <div class="info">
                                         <b class="categories">@item.NameType</b>
@@ -595,27 +547,27 @@
                                         <div class="price">
                                             <ins>
                                                 <span class="price-amount">
-                                                    <span class="currencySymbol">£</span>85.00
+                                                    <span class="currencySymbol">₫</span>85.00
                                                 </span>
                                             </ins>
                                             <del>
                                                 <span class="price-amount">
-                                                    <span class="currencySymbol">£</span>95.00
+                                                    <span class="currencySymbol">₫</span>95.00
                                                 </span>
                                             </del>
                                         </div>
                                         <div class="slide-down-box">
                                             @*<p class="message">
-                                                All products are carefully selected to ensure food
-                                                safety.
-                                            </p>*@
+                                                    All products are carefully selected to ensure food
+                                                    safety.
+                                                </p>*@
                                             <div class="buttons">
                                                 <a href="#" class="btn wishlist-btn">
                                                     <i class="fa fa-heart" aria-hidden="true"></i>
                                                 </a>
                                                 <a href="#" class="btn add-to-cart-btn">
                                                     <i class="fa fa-cart-arrow-down"
-                                                       aria-hidden="true"></i>add to cart
+                                                       aria-hidden="true"></i>Thêm Vào Giỏ Hàng
                                                 </a>
                                                 <a href="#" class="btn compare-btn">
                                                     <i class="fa fa-random" aria-hidden="true"></i>
@@ -640,14 +592,14 @@
                 <div class="media">
                     <div class="img-moving position-1">
                         <a href="#" class="banner-link">
-                            <img src="assets/images/home-04/bn_promotion-child01-2.png"
+                            <img src="~/Theme/assets/images/home-04/Banner30.png"
                                  width="780"
                                  height="450"
                                  alt="img msv" />
                         </a>
                     </div>
                     <div class="img-moving position-2">
-                        <img src="assets/images/home-04/bn_promotion-child02-2.png"
+                        <img src="~/Theme/assets/images/home-04/bn_promotion-child02-2.png"
                              width="149"
                              height="139"
                              alt="img msv" />
@@ -659,13 +611,13 @@
                     <div class="biolife-countdown"
                          data-datetime="2020-01-18 00:00 +00:00">
                         <span class="days">
-                            <span class="number">00</span><span class="text">days</span>
+                            <span class="number" id="days">00</span><span class="text">days</span>
                         </span><span class="hours">
-                            <span class="number">00</span><span class="text">Hours</span>
+                            <span class="number" id="hours">00</span><span class="text">Hours</span>
                         </span><span class="mins">
-                            <span class="number">00</span><span class="text">Mins</span>
+                            <span class="number" id="minutes">00</span><span class="text">Mins</span>
                         </span><span class="secs">
-                            <span class="number">00</span><span class="text">Secs</span>
+                            <span class="number" id="seconds">00</span><span class="text">Secs</span>
                         </span>
                     </div>
                     <p class="buttons">
@@ -688,159 +640,72 @@
                     </div>
                     <ul class="products biolife-carousel nav-top-right nav-none-on-mobile"
                         data-slick='{"arrows":true, "dots":false, "infinite":false, "speed":400, "slidesMargin":30, "slidesToShow":1}'>
-                        <li class="product-item">
-                            <div class="contain-product deal-layout contain-product__deal-layout">
-                                <div class="product-thumb">
-                                    <a href="#" class="link-to-product">
-                                        <img src="assets/images/home-03/product_deal_330x330.jpg"
-                                             alt="dd"
-                                             width="330"
-                                             height="330"
-                                             class="product-thumnail" />
-                                    </a>
-                                    <div class="labels">
-                                        <span class="sale-label">-50%</span>
+                       @foreach(var item in ViewBag.SaleOnDay)
+                        {
+                            <li class="product-item">
+                                <div class="contain-product deal-layout contain-product__deal-layout">
+                                    <div class="product-thumb">
+                                        <a href="#" class="link-to-product">
+                                            <img src="~/Theme/assets/images/products/@item.Img"
+                                                 alt="dd"
+                                                 width="330"
+                                                 height="330"
+                                                 class="product-thumnail" />
+                                        </a>
+                                        <div class="labels">
+                                            <span class="sale-label">-50%</span>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="info">
-                                    <div class="biolife-countdown"
-                                         data-datetime="2020/02/18 00:00:00"></div>
-                                    <b class="categories">Fresh Fruit</b>
-                                    <h4 class="product-title">
-                                        <a href="#" class="pr-name">National Fresh Fruit</a>
-                                    </h4>
-                                    <div class="price">
-                                        <ins>
-                                            <span class="price-amount">
-                                                <span class="currencySymbol">£</span>85.00
+                                    <div class="info">
+                                        <div class="biolife-countdown"
+                                             data-datetime="2020-01-18 00:00 +00:00">
+                                            <span class="days">
+                                                <span class="number" id="days">00</span><span class="text">days</span>
+                                            </span><span class="hours">
+                                                <span class="number" id="hours">00</span><span class="text">Hours</span>
+                                            </span><span class="mins">
+                                                <span class="number" id="minutes">00</span><span class="text">Mins</span>
+                                            </span><span class="secs">
+                                                <span class="number" id="seconds">00</span><span class="text">Secs</span>
                                             </span>
-                                        </ins>
-                                        <del>
-                                            <span class="price-amount">
-                                                <span class="currencySymbol">£</span>95.00
-                                            </span>
-                                        </del>
-                                    </div>
-                                    <div class="slide-down-box">
-                                        <p class="message">
-                                            All products are carefully selected to ensure food
-                                            safety.
-                                        </p>
-                                        <div class="buttons">
-                                            <a href="#" class="btn wishlist-btn">
-                                                <i class="fa fa-heart" aria-hidden="true"></i>
-                                            </a>
-                                            <a href="#" class="btn add-to-cart-btn">add to cart</a>
-                                            <a href="#" class="btn compare-btn">
-                                                <i class="fa fa-random" aria-hidden="true"></i>
-                                            </a>
+                                        </div>
+                                        <b class="categories">Fresh Fruit</b>
+                                        <h4 class="product-title">
+                                            <a href="#" class="pr-name">National Fresh Fruit</a>
+                                        </h4>
+                                        <div class="price">
+                                            <ins>
+                                                <span class="price-amount">
+                                                    <span class="currencySymbol">₫</span>85.00
+                                                </span>
+                                            </ins>
+                                            <del>
+                                                <span class="price-amount">
+                                                    <span class="currencySymbol">₫</span>95.00
+                                                </span>
+                                            </del>
+                                        </div>
+                                        <div class="slide-down-box">
+                                            <p class="message">
+                                                All products are carefully selected to ensure food
+                                                safety.
+                                            </p>
+                                            <div class="buttons">
+                                                <a href="#" class="btn wishlist-btn">
+                                                    <i class="fa fa-heart" aria-hidden="true"></i>
+                                                </a>
+                                                <a href="#" class="btn add-to-cart-btn">add to cart</a>
+                                                <a href="#" class="btn compare-btn">
+                                                    <i class="fa fa-random" aria-hidden="true"></i>
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </li>
-                        <li class="product-item">
-                            <div class="contain-product deal-layout contain-product__deal-layout">
-                                <div class="product-thumb">
-                                    <a href="#" class="link-to-product">
-                                        <img src="assets/images/home-03/product_deal-02_330x330.jpg"
-                                             alt="dd"
-                                             width="330"
-                                             height="330"
-                                             class="product-thumnail" />
-                                    </a>
-                                    <div class="labels">
-                                        <span class="sale-label">-50%</span>
-                                    </div>
-                                </div>
-                                <div class="info">
-                                    <div class="biolife-countdown"
-                                         data-datetime="2020/04/18 00:00:00"></div>
-                                    <b class="categories">Fresh Fruit</b>
-                                    <h4 class="product-title">
-                                        <a href="#" class="pr-name">National Fresh Fruit</a>
-                                    </h4>
-                                    <div class="price">
-                                        <ins>
-                                            <span class="price-amount">
-                                                <span class="currencySymbol">£</span>85.00
-                                            </span>
-                                        </ins>
-                                        <del>
-                                            <span class="price-amount">
-                                                <span class="currencySymbol">£</span>95.00
-                                            </span>
-                                        </del>
-                                    </div>
-                                    <div class="slide-down-box">
-                                        <p class="message">
-                                            All products are carefully selected to ensure food
-                                            safety.
-                                        </p>
-                                        <div class="buttons">
-                                            <a href="#" class="btn wishlist-btn">
-                                                <i class="fa fa-heart" aria-hidden="true"></i>
-                                            </a>
-                                            <a href="#" class="btn add-to-cart-btn">add to cart</a>
-                                            <a href="#" class="btn compare-btn">
-                                                <i class="fa fa-random" aria-hidden="true"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="product-item">
-                            <div class="contain-product deal-layout contain-product__deal-layout">
-                                <div class="product-thumb">
-                                    <a href="#" class="link-to-product">
-                                        <img src="assets/images/home-03/product_deal-03_330x330.jpg"
-                                             alt="dd"
-                                             width="330"
-                                             height="330"
-                                             class="product-thumnail" />
-                                    </a>
-                                    <div class="labels">
-                                        <span class="sale-label">-50%</span>
-                                    </div>
-                                </div>
-                                <div class="info">
-                                    <div class="biolife-countdown"
-                                         data-datetime="2020/01/18 00:00:00"></div>
-                                    <b class="categories">Fresh Fruit</b>
-                                    <h4 class="product-title">
-                                        <a href="#" class="pr-name">National Fresh Fruit</a>
-                                    </h4>
-                                    <div class="price">
-                                        <ins>
-                                            <span class="price-amount">
-                                                <span class="currencySymbol">£</span>85.00
-                                            </span>
-                                        </ins>
-                                        <del>
-                                            <span class="price-amount">
-                                                <span class="currencySymbol">£</span>95.00
-                                            </span>
-                                        </del>
-                                    </div>
-                                    <div class="slide-down-box">
-                                        <p class="message">
-                                            All products are carefully selected to ensure food
-                                            safety.
-                                        </p>
-                                        <div class="buttons">
-                                            <a href="#" class="btn wishlist-btn">
-                                                <i class="fa fa-heart" aria-hidden="true"></i>
-                                            </a>
-                                            <a href="#" class="btn add-to-cart-btn">add to cart</a>
-                                            <a href="#" class="btn compare-btn">
-                                                <i class="fa fa-random" aria-hidden="true"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
+                            </li>
+                        }
+
+
                     </ul>
                 </div>
             </div>
@@ -851,302 +716,47 @@
                     </div>
                     <ul class="products biolife-carousel eq-height-contain nav-center-03 nav-none-on-mobile row-space-29px"
                         data-slick='{"rows":2,"arrows":true,"dots":false,"infinite":false,"speed":400,"slidesMargin":30,"slidesToShow":2,"responsive":[{"breakpoint":1200,"settings":{ "rows":2, "slidesToShow": 2}},{"breakpoint":992, "settings":{ "rows":2, "slidesToShow": 1}},{"breakpoint":768, "settings":{ "rows":2, "slidesToShow": 2}},{"breakpoint":500, "settings":{ "rows":2, "slidesToShow": 1}}]}'>
-                        <li class="product-item">
-                            <div class="contain-product right-info-layout contain-product__right-info-layout">
-                                <div class="product-thumb">
-                                    <a href="#" class="link-to-product">
-                                        <img src="assets/images/products/p-19.jpg"
-                                             alt="dd"
-                                             width="270"
-                                             height="270"
-                                             class="product-thumnail" />
-                                    </a>
-                                </div>
-                                <div class="info">
-                                    <b class="categories">Vegetables</b>
-                                    <h4 class="product-title">
-                                        <a href="#" class="pr-name">Pumpkins Fairytale</a>
-                                    </h4>
-                                    <div class="price">
-                                        <ins>
-                                            <span class="price-amount">
-                                                <span class="currencySymbol">£</span>85.00
-                                            </span>
-                                        </ins>
-                                        <del>
-                                            <span class="price-amount">
-                                                <span class="currencySymbol">£</span>95.00
-                                            </span>
-                                        </del>
+
+                        @foreach (var item in ViewBag.OSProduct)
+                        {
+                            <li class="product-item">
+                                <div class="contain-product right-info-layout contain-product__right-info-layout">
+                                    <div class="product-thumb">
+                                        <a href="#" class="link-to-product">
+                                            <img src="~/Theme/assets/images/products/@item.Img"
+                                                 alt="dd"
+                                                 width="270"
+                                                 height="270"
+                                                 class="product-thumnail" />
+                                        </a>
                                     </div>
-                                    <div class="rating">
-                                        <p class="star-rating">
-                                            <span class="width-80percent"></span>
-                                        </p>
-                                        <span class="review-count">(05 Reviews)</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="product-item">
-                            <div class="contain-product right-info-layout contain-product__right-info-layout">
-                                <div class="product-thumb">
-                                    <a href="#" class="link-to-product">
-                                        <img src="assets/images/products/p-03.jpg"
-                                             alt="dd"
-                                             width="270"
-                                             height="270"
-                                             class="product-thumnail" />
-                                    </a>
-                                </div>
-                                <div class="info">
-                                    <b class="categories">Vegetables</b>
-                                    <h4 class="product-title">
-                                        <a href="#" class="pr-name">Passover Cauliflower</a>
-                                    </h4>
-                                    <div class="price">
-                                        <ins>
-                                            <span class="price-amount">
-                                                <span class="currencySymbol">£</span>85.00
-                                            </span>
-                                        </ins>
-                                        <del>
-                                            <span class="price-amount">
-                                                <span class="currencySymbol">£</span>95.00
-                                            </span>
-                                        </del>
-                                    </div>
-                                    <div class="rating">
-                                        <p class="star-rating">
-                                            <span class="width-80percent"></span>
-                                        </p>
-                                        <span class="review-count">(05 Reviews)</span>
+                                    <div class="info">
+                                        <b class="categories">@item.NameType</b>
+                                        <h4 class="product-title">
+                                            <a href="#" class="pr-name">@item.Name</a>
+                                        </h4>
+                                        <div class="price">
+                                            <ins>
+                                                <span class="price-amount">
+                                                    <span class="currencySymbol">₫</span>85.00
+                                                </span>
+                                            </ins>
+                                            <del>
+                                                <span class="price-amount">
+                                                    <span class="currencySymbol">₫</span>95.00
+                                                </span>
+                                            </del>
+                                        </div>
+                                        <div class="rating">
+                                            <p class="star-rating">
+                                                <span class="width-80percent"></span>
+                                            </p>
+                                            <span class="review-count">(@item.Rated Reviews)</span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </li>
-                        <li class="product-item">
-                            <div class="contain-product right-info-layout contain-product__right-info-layout">
-                                <div class="product-thumb">
-                                    <a href="#" class="link-to-product">
-                                        <img src="assets/images/products/p-02.jpg"
-                                             alt="dd"
-                                             width="270"
-                                             height="270"
-                                             class="product-thumnail" />
-                                    </a>
-                                </div>
-                                <div class="info">
-                                    <b class="categories">Vegetables</b>
-                                    <h4 class="product-title">
-                                        <a href="#" class="pr-name">Hot Chili Peppers</a>
-                                    </h4>
-                                    <div class="price">
-                                        <ins>
-                                            <span class="price-amount">
-                                                <span class="currencySymbol">£</span>85.00
-                                            </span>
-                                        </ins>
-                                        <del>
-                                            <span class="price-amount">
-                                                <span class="currencySymbol">£</span>95.00
-                                            </span>
-                                        </del>
-                                    </div>
-                                    <div class="rating">
-                                        <p class="star-rating">
-                                            <span class="width-80percent"></span>
-                                        </p>
-                                        <span class="review-count">(05 Reviews)</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="product-item">
-                            <div class="contain-product right-info-layout contain-product__right-info-layout">
-                                <div class="product-thumb">
-                                    <a href="#" class="link-to-product">
-                                        <img src="assets/images/products/p-22.jpg"
-                                             alt="dd"
-                                             width="270"
-                                             height="270"
-                                             class="product-thumnail" />
-                                    </a>
-                                </div>
-                                <div class="info">
-                                    <b class="categories">Vegetables</b>
-                                    <h4 class="product-title">
-                                        <a href="#" class="pr-name">Cherry Tomato Seeds</a>
-                                    </h4>
-                                    <div class="price">
-                                        <ins>
-                                            <span class="price-amount">
-                                                <span class="currencySymbol">£</span>85.00
-                                            </span>
-                                        </ins>
-                                        <del>
-                                            <span class="price-amount">
-                                                <span class="currencySymbol">£</span>95.00
-                                            </span>
-                                        </del>
-                                    </div>
-                                    <div class="rating">
-                                        <p class="star-rating">
-                                            <span class="width-80percent"></span>
-                                        </p>
-                                        <span class="review-count">(05 Reviews)</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="product-item">
-                            <div class="contain-product right-info-layout contain-product__right-info-layout">
-                                <div class="product-thumb">
-                                    <a href="#" class="link-to-product">
-                                        <img src="assets/images/products/p-20.jpg"
-                                             alt="dd"
-                                             width="270"
-                                             height="270"
-                                             class="product-thumnail" />
-                                    </a>
-                                </div>
-                                <div class="info">
-                                    <b class="categories">Vegetables</b>
-                                    <h4 class="product-title">
-                                        <a href="#" class="pr-name">National Fresh Fruit</a>
-                                    </h4>
-                                    <div class="price">
-                                        <ins>
-                                            <span class="price-amount">
-                                                <span class="currencySymbol">£</span>85.00
-                                            </span>
-                                        </ins>
-                                        <del>
-                                            <span class="price-amount">
-                                                <span class="currencySymbol">£</span>95.00
-                                            </span>
-                                        </del>
-                                    </div>
-                                    <div class="rating">
-                                        <p class="star-rating">
-                                            <span class="width-80percent"></span>
-                                        </p>
-                                        <span class="review-count">(05 Reviews)</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="product-item">
-                            <div class="contain-product right-info-layout contain-product__right-info-layout">
-                                <div class="product-thumb">
-                                    <a href="#" class="link-to-product">
-                                        <img src="assets/images/products/p-05.jpg"
-                                             alt="dd"
-                                             width="270"
-                                             height="270"
-                                             class="product-thumnail" />
-                                    </a>
-                                </div>
-                                <div class="info">
-                                    <b class="categories">Vegetables</b>
-                                    <h4 class="product-title">
-                                        <a href="#" class="pr-name">Organic Hass Avocado</a>
-                                    </h4>
-                                    <div class="price">
-                                        <ins>
-                                            <span class="price-amount">
-                                                <span class="currencySymbol">£</span>85.00
-                                            </span>
-                                        </ins>
-                                        <del>
-                                            <span class="price-amount">
-                                                <span class="currencySymbol">£</span>95.00
-                                            </span>
-                                        </del>
-                                    </div>
-                                    <div class="rating">
-                                        <p class="star-rating">
-                                            <span class="width-80percent"></span>
-                                        </p>
-                                        <span class="review-count">(05 Reviews)</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="product-item">
-                            <div class="contain-product right-info-layout contain-product__right-info-layout">
-                                <div class="product-thumb">
-                                    <a href="#" class="link-to-product">
-                                        <img src="assets/images/products/p-06.jpg"
-                                             alt="dd"
-                                             width="270"
-                                             height="270"
-                                             class="product-thumnail" />
-                                    </a>
-                                </div>
-                                <div class="info">
-                                    <b class="categories">Vegetables</b>
-                                    <h4 class="product-title">
-                                        <a href="#" class="pr-name">Packham's Pears</a>
-                                    </h4>
-                                    <div class="price">
-                                        <ins>
-                                            <span class="price-amount">
-                                                <span class="currencySymbol">£</span>85.00
-                                            </span>
-                                        </ins>
-                                        <del>
-                                            <span class="price-amount">
-                                                <span class="currencySymbol">£</span>95.00
-                                            </span>
-                                        </del>
-                                    </div>
-                                    <div class="rating">
-                                        <p class="star-rating">
-                                            <span class="width-80percent"></span>
-                                        </p>
-                                        <span class="review-count">(05 Reviews)</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="product-item">
-                            <div class="contain-product right-info-layout contain-product__right-info-layout">
-                                <div class="product-thumb">
-                                    <a href="#" class="link-to-product">
-                                        <img src="assets/images/products/p-20.jpg"
-                                             alt="dd"
-                                             width="270"
-                                             height="270"
-                                             class="product-thumnail" />
-                                    </a>
-                                </div>
-                                <div class="info">
-                                    <b class="categories">Vegetables</b>
-                                    <h4 class="product-title">
-                                        <a href="#" class="pr-name">National Fresh Fruit</a>
-                                    </h4>
-                                    <div class="price">
-                                        <ins>
-                                            <span class="price-amount">
-                                                <span class="currencySymbol">£</span>85.00
-                                            </span>
-                                        </ins>
-                                        <del>
-                                            <span class="price-amount">
-                                                <span class="currencySymbol">£</span>95.00
-                                            </span>
-                                        </del>
-                                    </div>
-                                    <div class="rating">
-                                        <p class="star-rating">
-                                            <span class="width-80percent"></span>
-                                        </p>
-                                        <span class="review-count">(05 Reviews)</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
+                            </li>
+                        }
                     </ul>
                     <div class="biolife-banner style-01 biolife-banner__style-01 xs-margin-top-80px-im sm-margin-top-30px-im">
                         <div class="banner-contain">
@@ -1200,12 +810,12 @@
                 <div class="price">
                   <ins
                     ><span class="price-amount"
-                      ><span class="currencySymbol">£</span>85.00</span
+                      ><span class="currencySymbol">₫</span>85.00</span
                     ></ins
                   >
                   <del
                     ><span class="price-amount"
-                      ><span class="currencySymbol">£</span>95.00</span
+                      ><span class="currencySymbol">₫</span>95.00</span
                     ></del
                   >
                 </div>
@@ -1240,12 +850,12 @@
                 <div class="price">
                   <ins
                     ><span class="price-amount"
-                      ><span class="currencySymbol">£</span>85.00</span
+                      ><span class="currencySymbol">₫</span>85.00</span
                     ></ins
                   >
                   <del
                     ><span class="price-amount"
-                      ><span class="currencySymbol">£</span>95.00</span
+                      ><span class="currencySymbol">₫</span>95.00</span
                     ></del
                   >
                 </div>
@@ -1280,12 +890,12 @@
                 <div class="price">
                   <ins
                     ><span class="price-amount"
-                      ><span class="currencySymbol">£</span>85.00</span
+                      ><span class="currencySymbol">₫</span>85.00</span
                     ></ins
                   >
                   <del
                     ><span class="price-amount"
-                      ><span class="currencySymbol">£</span>95.00</span
+                      ><span class="currencySymbol">₫</span>95.00</span
                     ></del
                   >
                 </div>
@@ -1333,12 +943,12 @@
                 <div class="price">
                   <ins
                     ><span class="price-amount"
-                      ><span class="currencySymbol">£</span>85.00</span
+                      ><span class="currencySymbol">₫</span>85.00</span
                     ></ins
                   >
                   <del
                     ><span class="price-amount"
-                      ><span class="currencySymbol">£</span>95.00</span
+                      ><span class="currencySymbol">₫</span>95.00</span
                     ></del
                   >
                 </div>
@@ -1373,12 +983,12 @@
                 <div class="price">
                   <ins
                     ><span class="price-amount"
-                      ><span class="currencySymbol">£</span>85.00</span
+                      ><span class="currencySymbol">₫</span>85.00</span
                     ></ins
                   >
                   <del
                     ><span class="price-amount"
-                      ><span class="currencySymbol">£</span>95.00</span
+                      ><span class="currencySymbol">₫</span>95.00</span
                     ></del
                   >
                 </div>
@@ -1413,12 +1023,12 @@
                 <div class="price">
                   <ins
                     ><span class="price-amount"
-                      ><span class="currencySymbol">£</span>85.00</span
+                      ><span class="currencySymbol">₫</span>85.00</span
                     ></ins
                   >
                   <del
                     ><span class="price-amount"
-                      ><span class="currencySymbol">£</span>95.00</span
+                      ><span class="currencySymbol">₫</span>95.00</span
                     ></del
                   >
                 </div>
@@ -1468,12 +1078,12 @@
                 <div class="price">
                   <ins
                     ><span class="price-amount"
-                      ><span class="currencySymbol">£</span>85.00</span
+                      ><span class="currencySymbol">₫</span>85.00</span
                     ></ins
                   >
                   <del
                     ><span class="price-amount"
-                      ><span class="currencySymbol">£</span>95.00</span
+                      ><span class="currencySymbol">₫</span>95.00</span
                     ></del
                   >
                 </div>
@@ -1508,12 +1118,12 @@
                 <div class="price">
                   <ins
                     ><span class="price-amount"
-                      ><span class="currencySymbol">£</span>85.00</span
+                      ><span class="currencySymbol">₫</span>85.00</span
                     ></ins
                   >
                   <del
                     ><span class="price-amount"
-                      ><span class="currencySymbol">£</span>95.00</span
+                      ><span class="currencySymbol">₫</span>95.00</span
                     ></del
                   >
                 </div>
@@ -1548,12 +1158,12 @@
                 <div class="price">
                   <ins
                     ><span class="price-amount"
-                      ><span class="currencySymbol">£</span>85.00</span
+                      ><span class="currencySymbol">₫</span>85.00</span
                     ></ins
                   >
                   <del
                     ><span class="price-amount"
-                      ><span class="currencySymbol">£</span>95.00</span
+                      ><span class="currencySymbol">₫</span>95.00</span
                     ></del
                   >
                 </div>
@@ -1610,26 +1220,24 @@
                 <div class="post-item style-bottom-info layout-02">
                     <div class="thumbnail">
                         <a href="#" class="link-to-post">
-                            <img src="assets/images/our-blog/post-thumb-01.jpg"
+                            <img src="~/Theme/assets/images/Blog/Blog_BiDo.png"
                                  width="370"
                                  height="270"
                                  alt="" />
                         </a>
                         <div class="post-date">
-                            <span class="date">26</span>
-                            <span class="month">dec</span>
+                            <span class="date">25</span>
+                            <span class="month">10</span>
                         </div>
                     </div>
                     <div class="post-content">
                         <h4 class="post-name">
-                            <a href="#" class="linktopost">Ashwagandha: The #1 Herb in the World for Anxiety?</a>
+                            <a href="#" class="linktopost">Bí đỏ non là gì? Các món ngon dễ làm từ bí đỏ non</a>
                         </h4>
                         <div class="post-meta">
                             <a href="#" class="post-meta__item author">
-                                <img src="assets/images/home-03/post-author.png"
-                                     width="28"
-                                     height="28"
-                                     alt="" /><span>Admin</span>
+                                <i class="fa fa-user"></i>
+                                <span>Admin</span>
                             </a>
                             <a href="#" class="post-meta__item btn liked-count">
                                 2<span class="biolife-icon icon-comment"></span>
@@ -1676,12 +1284,10 @@
                             </div>
                         </div>
                         <p class="excerpt">
-                            Did you know that red-staining foods are excellent
-                            lymph-movers? In fact, many plants that were historically
-                            used as dyes...
+                            Bí đỏ non là một thực phẩm giàu dinh dưỡng, có thể chế biến thành nhiều món ăn ngon khác nhau. Cùng khám phá thêm thông tin về loại bí này nhé!
                         </p>
                         <div class="group-buttons">
-                            <a href="#" class="btn readmore">continue reading</a>
+                            <a href="#" class="btn readmore">Xem Thêm</a>
                         </div>
                     </div>
                 </div>
@@ -1690,26 +1296,24 @@
                 <div class="post-item style-bottom-info layout-02">
                     <div class="thumbnail">
                         <a href="#" class="link-to-post">
-                            <img src="assets/images/our-blog/post-thumb-02.jpg"
+                            <img src="~/Theme/assets/images/Blog/Blog_Hong.png"
                                  width="370"
                                  height="270"
                                  alt="" />
                         </a>
                         <div class="post-date">
                             <span class="date">26</span>
-                            <span class="month">dec</span>
+                            <span class="month">10</span>
                         </div>
                     </div>
                     <div class="post-content">
                         <h4 class="post-name">
-                            <a href="#" class="linktopost">Ashwagandha: The #1 Herb in the World for Anxiety?</a>
+                            <a href="#" class="linktopost">Quả hồng có màu sắc và hương vị như socola, có giá đến nửa triệu 1 kg</a>
                         </h4>
                         <div class="post-meta">
                             <a href="#" class="post-meta__item author">
-                                <img src="assets/images/home-03/post-author.png"
-                                     width="28"
-                                     height="28"
-                                     alt="" /><span>Admin</span>
+                                <i class="fa fa-user"></i>
+                                <span>Admin</span>
                             </a>
                             <a href="#" class="post-meta__item btn liked-count">
                                 2<span class="biolife-icon icon-comment"></span>
@@ -1756,12 +1360,10 @@
                             </div>
                         </div>
                         <p class="excerpt">
-                            Did you know that red-staining foods are excellent
-                            lymph-movers? In fact, many plants that were historically
-                            used as dyes...
+                            Quả hồng socola là một loại trái cây mới lạ được nhiều người ưa chuộng. Cùng Bách hóa XANH tìm hiểu về quả hồng socola có giá đến nửa triệu 1kg này nhé.
                         </p>
                         <div class="group-buttons">
-                            <a href="#" class="btn readmore">continue reading</a>
+                            <a href="#" class="btn readmore">Xem Thêm</a>
                         </div>
                     </div>
                 </div>
@@ -1770,26 +1372,25 @@
                 <div class="post-item style-bottom-info layout-02">
                     <div class="thumbnail">
                         <a href="#" class="link-to-post">
-                            <img src="assets/images/our-blog/post-thumb-04.jpg"
+                            <img src="~/Theme/assets/images/Blog/Blog_SauRieng.png"
                                  width="370"
                                  height="270"
                                  alt="" />
                         </a>
+
                         <div class="post-date">
-                            <span class="date">26</span>
-                            <span class="month">dec</span>
+                            <span class="date">5</span>
+                            <span class="month">11</span>
                         </div>
                     </div>
                     <div class="post-content">
                         <h4 class="post-name">
-                            <a href="#" class="linktopost">Ashwagandha: The #1 Herb in the World for Anxiety?</a>
+                            <a href="#" class="linktopost">Biến tấu sầu riêng sượng thành 4 món ăn thơm ngon khó cưỡng</a>
                         </h4>
                         <div class="post-meta">
                             <a href="#" class="post-meta__item author">
-                                <img src="assets/images/home-03/post-author.png"
-                                     width="28"
-                                     height="28"
-                                     alt="" /><span>Admin</span>
+                                <i class="fa fa-user"></i>
+                                <span>Admin</span>
                             </a>
                             <a href="#" class="post-meta__item btn liked-count">
                                 2<span class="biolife-icon icon-comment"></span>
@@ -1836,12 +1437,10 @@
                             </div>
                         </div>
                         <p class="excerpt">
-                            Did you know that red-staining foods are excellent
-                            lymph-movers? In fact, many plants that were historically
-                            used as dyes...
+                            Sầu riêng sượng có thể biến tấu thành nhiều món ăn ngon, hấp dẫn. Tham khảo ngay 4 món ăn thơm ngon khó cưỡng từ sầu riêng sượng ngay sau đây nhé!
                         </p>
                         <div class="group-buttons">
-                            <a href="#" class="btn readmore">continue reading</a>
+                            <a href="#" class="btn readmore">Xem thêm</a>
                         </div>
                     </div>
                 </div>
@@ -1850,26 +1449,24 @@
                 <div class="post-item style-bottom-info layout-02">
                     <div class="thumbnail">
                         <a href="#" class="link-to-post">
-                            <img src="assets/images/our-blog/post-thumb-03.jpg"
+                            <img src="~/Theme/assets/images/Blog/Blog_BiDo.png"
                                  width="370"
                                  height="270"
                                  alt="" />
                         </a>
                         <div class="post-date">
-                            <span class="date">26</span>
-                            <span class="month">dec</span>
+                            <span class="date">25</span>
+                            <span class="month">10</span>
                         </div>
                     </div>
                     <div class="post-content">
                         <h4 class="post-name">
-                            <a href="#" class="linktopost">Ashwagandha: The #1 Herb in the World for Anxiety?</a>
+                            <a href="#" class="linktopost">Bí đỏ non là gì? Các món ngon dễ làm từ bí đỏ non</a>
                         </h4>
                         <div class="post-meta">
                             <a href="#" class="post-meta__item author">
-                                <img src="assets/images/home-03/post-author.png"
-                                     width="28"
-                                     height="28"
-                                     alt="" /><span>Admin</span>
+                                <i class="fa fa-user"></i>
+                                <span>Admin</span>
                             </a>
                             <a href="#" class="post-meta__item btn liked-count">
                                 2<span class="biolife-icon icon-comment"></span>
@@ -1916,12 +1513,10 @@
                             </div>
                         </div>
                         <p class="excerpt">
-                            Did you know that red-staining foods are excellent
-                            lymph-movers? In fact, many plants that were historically
-                            used as dyes...
+                            Bí đỏ non là một thực phẩm giàu dinh dưỡng, có thể chế biến thành nhiều món ăn ngon khác nhau. Cùng khám phá thêm thông tin về loại bí này nhé!
                         </p>
                         <div class="group-buttons">
-                            <a href="#" class="btn readmore">continue reading</a>
+                            <a href="#" class="btn readmore">Xem Thêm</a>
                         </div>
                     </div>
                 </div>
@@ -1930,26 +1525,24 @@
                 <div class="post-item style-bottom-info layout-02">
                     <div class="thumbnail">
                         <a href="#" class="link-to-post">
-                            <img src="assets/images/our-blog/post-thumb-05.jpg"
+                            <img src="~/Theme/assets/images/Blog/Blog_Hong.png"
                                  width="370"
                                  height="270"
                                  alt="" />
                         </a>
                         <div class="post-date">
                             <span class="date">26</span>
-                            <span class="month">dec</span>
+                            <span class="month">10</span>
                         </div>
                     </div>
                     <div class="post-content">
                         <h4 class="post-name">
-                            <a href="#" class="linktopost">Ashwagandha: The #1 Herb in the World for Anxiety?</a>
+                            <a href="#" class="linktopost">Quả hồng có màu sắc và hương vị như socola, có giá đến nửa triệu 1 kg</a>
                         </h4>
                         <div class="post-meta">
                             <a href="#" class="post-meta__item author">
-                                <img src="assets/images/home-03/post-author.png"
-                                     width="28"
-                                     height="28"
-                                     alt="" /><span>Admin</span>
+                                <i class="fa fa-user"></i>
+                                <span>Admin</span>
                             </a>
                             <a href="#" class="post-meta__item btn liked-count">
                                 2<span class="biolife-icon icon-comment"></span>
@@ -1996,12 +1589,10 @@
                             </div>
                         </div>
                         <p class="excerpt">
-                            Did you know that red-staining foods are excellent
-                            lymph-movers? In fact, many plants that were historically
-                            used as dyes...
+                            Quả hồng socola là một loại trái cây mới lạ được nhiều người ưa chuộng. Cùng Bách hóa XANH tìm hiểu về quả hồng socola có giá đến nửa triệu 1kg này nhé.
                         </p>
                         <div class="group-buttons">
-                            <a href="#" class="btn readmore">continue reading</a>
+                            <a href="#" class="btn readmore">Xem Thêm</a>
                         </div>
                     </div>
                 </div>
@@ -2010,26 +1601,25 @@
                 <div class="post-item style-bottom-info layout-02">
                     <div class="thumbnail">
                         <a href="#" class="link-to-post">
-                            <img src="assets/images/our-blog/post-thumb-06.jpg"
+                            <img src="~/Theme/assets/images/Blog/Blog_SauRieng.png"
                                  width="370"
                                  height="270"
                                  alt="" />
                         </a>
+
                         <div class="post-date">
-                            <span class="date">26</span>
-                            <span class="month">dec</span>
+                            <span class="date">5</span>
+                            <span class="month">11</span>
                         </div>
                     </div>
                     <div class="post-content">
                         <h4 class="post-name">
-                            <a href="#" class="linktopost">Ashwagandha: The #1 Herb in the World for Anxiety?</a>
+                            <a href="#" class="linktopost">Biến tấu sầu riêng sượng thành 4 món ăn thơm ngon khó cưỡng</a>
                         </h4>
                         <div class="post-meta">
                             <a href="#" class="post-meta__item author">
-                                <img src="assets/images/home-03/post-author.png"
-                                     width="28"
-                                     height="28"
-                                     alt="" /><span>Admin</span>
+                                <i class="fa fa-user"></i>
+                                <span>Admin</span>
                             </a>
                             <a href="#" class="post-meta__item btn liked-count">
                                 2<span class="biolife-icon icon-comment"></span>
@@ -2076,12 +1666,10 @@
                             </div>
                         </div>
                         <p class="excerpt">
-                            Did you know that red-staining foods are excellent
-                            lymph-movers? In fact, many plants that were historically
-                            used as dyes...
+                            Sầu riêng sượng có thể biến tấu thành nhiều món ăn ngon, hấp dẫn. Tham khảo ngay 4 món ăn thơm ngon khó cưỡng từ sầu riêng sượng ngay sau đây nhé!
                         </p>
                         <div class="group-buttons">
-                            <a href="#" class="btn readmore">continue reading</a>
+                            <a href="#" class="btn readmore">Xem thêm</a>
                         </div>
                     </div>
                 </div>
@@ -2091,7 +1679,7 @@
 </div>
 
 <!--Block 07: Brands-->
-<div class="brand-slide background-fafafa xs-margin-top-50px sm-margin-top-80px sm-margin-bottom-73px">
+@*<div class="brand-slide background-fafafa xs-margin-top-50px sm-margin-top-80px sm-margin-bottom-73px">
     <div class="container">
         <ul class="biolife-carousel nav-center-bold nav-none-on-mobile"
             data-slick='{"rows":1,"arrows":true,"dots":false,"infinite":false,"speed":400,"slidesMargin":30,"slidesToShow":4, "responsive":[{"breakpoint":1200, "settings":{ "slidesToShow": 4}},{"breakpoint":992, "settings":{ "slidesToShow": 3}},{"breakpoint":768, "settings":{ "slidesToShow": 2}},{"breakpoint": 550, "settings":{ "slidesToShow": 1}}]}'>
@@ -2193,5 +1781,5 @@
             </li>
         </ul>
     </div>
-</div>
+</div>*@
 

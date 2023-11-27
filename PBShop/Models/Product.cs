@@ -27,8 +27,9 @@ namespace PBShop.Models
         public string Img { get; set; }
         public string Describe { get; set; }
         public int Id_Type { get; set; }
-        public int Id_Promotional { get; set; }
+        public Nullable<int> Id_Promotional { get; set; }
         public Nullable<System.DateTime> DateAdded { get; set; }
+        public Nullable<double> Rated { get; set; }
     
         public virtual Promotion Promotion { get; set; }
         public virtual Type Type { get; set; }

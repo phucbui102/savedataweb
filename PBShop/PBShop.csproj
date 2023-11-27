@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -49,10 +48,13 @@
       <HintPath>..\packages\BeginCollectionItem.1.2.1.0\lib\net35\BeginCollectionItem.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\lib\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
@@ -64,6 +66,11 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Linq, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Linq.4.3.0\lib\net463\System.Linq.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Linq.Dynamic, Version=1.0.6132.35681, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Linq.Dynamic.1.0.8\lib\net40\System.Linq.Dynamic.dll</HintPath>
     </Reference>
@@ -132,16 +139,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
-      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ProductsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PBSopHomeController.cs" />
     <Compile Include="Controllers\SendMailerController.cs" />
@@ -150,7 +153,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Admin.cs">
+      <DependentUpon>PBShop.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Customer.cs">
+      <DependentUpon>PBShop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DetailsOder.cs">
       <DependentUpon>PBShop.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GetProduct.cs" />
@@ -223,6 +232,21 @@
     <Content Include="Areas\Admin\Views\Shared\_LayoutAdmin.cshtml" />
     <Content Include="Areas\Admin\Views\ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Home\Login.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_DetailsPartial.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\_PartialModal.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\_PartialData.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_LayoutManage.cshtml" />
     <EntityDeploy Include="Models\PBShop.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>PBShop.Designer.cs</LastGenOutput>
@@ -230,18 +254,14 @@
     <Content Include="Models\PBShop.edmx.diagram">
       <DependentUpon>PBShop.edmx</DependentUpon>
     </Content>
-    <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Home\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\Home\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\Home\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_DetailsPartial.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\Admin\Views\Home\_DetailsPartial.cshtml" />
-    <None Include="Scripts\jquery-3.4.1.intellisense.js" />
-    <Content Include="Scripts\jquery-3.4.1.js" />
-    <Content Include="Scripts\jquery-3.4.1.min.js" />
-    <Content Include="Scripts\jquery-3.4.1.slim.js" />
-    <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
+    <Content Include="Areas\Admin\Views\Shared\_LayoutLoginAdmin.cshtml" />
+    <None Include="Scripts\jquery-3.7.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.7.1.js" />
+    <Content Include="Scripts\jquery-3.7.1.min.js" />
+    <Content Include="Scripts\jquery-3.7.1.slim.js" />
+    <Content Include="Scripts\jquery-3.7.1.slim.min.js" />
+    <Content Include="Scripts\jquery-3.7.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.7.1.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
@@ -270,6 +290,7 @@
     <Content Include="Theme\assets\images\about-us\bn01.jpg" />
     <Content Include="Theme\assets\images\about-us\bn04.jpg" />
     <Content Include="Theme\assets\images\about-us\double-quotes.png" />
+    <Content Include="Theme\assets\images\Banner\Banner30%25.png" />
     <Content Include="Theme\assets\images\bg-newsletter.jpg" />
     <Content Include="Theme\assets\images\bg_tab-v1.png" />
     <Content Include="Theme\assets\images\bg_tab-v4.png" />
@@ -283,6 +304,9 @@
     <Content Include="Theme\assets\images\blogpost\post-wgt-03.jpg" />
     <Content Include="Theme\assets\images\blogpost\post_thumbnail.jpg" />
     <Content Include="Theme\assets\images\blogpost\viewer-avt.png" />
+    <Content Include="Theme\assets\images\Blog\Blog_BiDo.png" />
+    <Content Include="Theme\assets\images\Blog\Blog_Hong.png" />
+    <Content Include="Theme\assets\images\Blog\Blog_SauRieng.png" />
     <Content Include="Theme\assets\images\card1.jpg" />
     <Content Include="Theme\assets\images\card2.jpg" />
     <Content Include="Theme\assets\images\card3.jpg" />
@@ -398,6 +422,7 @@
     <Content Include="Theme\assets\images\home-03\slide-01.jpg" />
     <Content Include="Theme\assets\images\home-03\slomotion_02_bg.png" />
     <Content Include="Theme\assets\images\home-04\banner-promotion01.jpg" />
+    <Content Include="Theme\assets\images\home-04\Banner30.png" />
     <Content Include="Theme\assets\images\home-04\bn_promotion-child01-2.png" />
     <Content Include="Theme\assets\images\home-04\bn_promotion-child01.png" />
     <Content Include="Theme\assets\images\home-04\bn_promotion-child02-2.png" />
@@ -470,6 +495,7 @@
     <Content Include="Theme\assets\images\location-icon.png" />
     <Content Include="Theme\assets\images\logo-biolife-1.png" />
     <Content Include="Theme\assets\images\logo-biolife-5.png" />
+    <Content Include="Theme\assets\images\LogoShop.png" />
     <Content Include="Theme\assets\images\logo_pay\cod.png" />
     <Content Include="Theme\assets\images\logo_pay\master_card.png" />
     <Content Include="Theme\assets\images\logo_pay\momo.png" />
@@ -544,6 +570,7 @@
     <Content Include="Theme\assets\images\top_banner_shopping_cart.png" />
     <Content Include="Theme\assets\js\biolife.framework.js" />
     <Content Include="Theme\assets\js\bootstrap.min.js" />
+    <Content Include="Theme\assets\js\Edit.js" />
     <Content Include="Theme\assets\js\functions.js" />
     <Content Include="Theme\assets\js\jquery-3.4.1.min.js" />
     <Content Include="Theme\assets\js\jquery.countdown.min.js" />
@@ -657,6 +684,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="AreaAdmin\" />
     <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Theme\SaveImg\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -668,8 +696,6 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="packages.config" />
-    <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
-    <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -702,11 +728,12 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets'))" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

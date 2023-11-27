@@ -1,6 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="PBShopModelStoreContainer" CdmEntityContainer="PBShopEntities">
+    <EntitySetMapping Name="Admins">
+      <EntityTypeMapping TypeName="PBShopModel.Admin">
+        <MappingFragment StoreEntitySet="Admin">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Pass" ColumnName="Pass" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Customers">
       <EntityTypeMapping TypeName="PBShopModel.Customer">
         <MappingFragment StoreEntitySet="Customer">
@@ -12,9 +20,23 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Orders">
+      <EntityTypeMapping TypeName="PBShopModel.Order">
+        <MappingFragment StoreEntitySet="Order">
+          <ScalarProperty Name="MaKH" ColumnName="MaKH" />
+          <ScalarProperty Name="NgayDH" ColumnName="NgayDH" />
+          <ScalarProperty Name="NgayGiaoHang" ColumnName="NgayGiaoHang" />
+          <ScalarProperty Name="HTGiaoHang" ColumnName="HTGiaoHang" />
+          <ScalarProperty Name="HTThanhToan" ColumnName="HTThanhToan" />
+          <ScalarProperty Name="SoDH" ColumnName="SoDH" />
+          <ScalarProperty Name="TongTien" ColumnName="TongTien" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Products">
       <EntityTypeMapping TypeName="PBShopModel.Product">
         <MappingFragment StoreEntitySet="Product">
+          <ScalarProperty Name="Rated" ColumnName="Rated" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Price" ColumnName="Price" />
@@ -64,6 +86,14 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="DetailsOders">
+      <EntityTypeMapping TypeName="PBShopModel.DetailsOder">
+        <MappingFragment StoreEntitySet="DetailsOder">
+          <ScalarProperty Name="ID_Product" ColumnName="ID_Product" />
+          <ScalarProperty Name="ID_Oder" ColumnName="ID_Oder" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="ShoppingCartDetails">
       <EntityTypeMapping TypeName="PBShopModel.ShoppingCartDetail">
         <MappingFragment StoreEntitySet="ShoppingCartDetails">
@@ -77,18 +107,6 @@
         <MappingFragment StoreEntitySet="Type_Details">
           <ScalarProperty Name="Id_Type" ColumnName="Id_Type" />
           <ScalarProperty Name="Name" ColumnName="Name" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Orders">
-      <EntityTypeMapping TypeName="PBShopModel.Order">
-        <MappingFragment StoreEntitySet="Order">
-          <ScalarProperty Name="SoDH" ColumnName="SoDH" />
-          <ScalarProperty Name="HTThanhToan" ColumnName="HTThanhToan" />
-          <ScalarProperty Name="HTGiaoHang" ColumnName="HTGiaoHang" />
-          <ScalarProperty Name="NgayGiaoHang" ColumnName="NgayGiaoHang" />
-          <ScalarProperty Name="NgayDH" ColumnName="NgayDH" />
-          <ScalarProperty Name="MaKH" ColumnName="MaKH" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

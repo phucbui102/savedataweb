@@ -5,6 +5,13 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="PBShopModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Pass" Type="nchar" MaxLength="10" />
+        </EntityType>
         <EntityType Name="Customer">
           <Key>
             <PropertyRef Name="ID" />
@@ -14,6 +21,16 @@
           <Property Name="Password" Type="char" MaxLength="20" />
           <Property Name="Phone" Type="char" MaxLength="10" />
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'PBShop.dbo.DetailsOder' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DetailsOder">
+          <Key>
+            <PropertyRef Name="ID_Product" />
+            <PropertyRef Name="ID_Oder" />
+          </Key>
+          <Property Name="ID_Product" Type="int" Nullable="false" />
+          <Property Name="ID_Oder" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -25,6 +42,7 @@
           <Property Name="HTGiaoHang" Type="bit" />
           <Property Name="HTThanhToan" Type="bit" />
           <Property Name="SoDH" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TongTien" Type="float" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -37,8 +55,9 @@
           <Property Name="Img" Type="char" MaxLength="30" />
           <Property Name="Describe" Type="nvarchar(max)" />
           <Property Name="Id_Type" Type="int" Nullable="false" />
-          <Property Name="Id_Promotional" Type="int" Nullable="false" />
-          <Property Name="DateAdded" Type="smalldatetime" />
+          <Property Name="Id_Promotional" Type="int" />
+          <Property Name="DateAdded" Type="date" />
+          <Property Name="Rated" Type="float" />
         </EntityType>
         <EntityType Name="Promotion">
           <Key>
@@ -106,7 +125,7 @@ warning 6002: The table/view 'PBShop.dbo.Type_Details' does not have a primary k
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Product_Promotion">
-          <End Role="Promotion" Type="Self.Promotion" Multiplicity="1" />
+          <End Role="Promotion" Type="Self.Promotion" Multiplicity="0..1" />
           <End Role="Product" Type="Self.Product" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Promotion">
@@ -117,7 +136,7 @@ warning 6002: The table/view 'PBShop.dbo.Type_Details' does not have a primary k
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Product_Type">
+        <Association Name="FK_Product_Type1">
           <End Role="Type" Type="Self.Type" Multiplicity="1" />
           <End Role="Product" Type="Self.Product" Multiplicity="*" />
           <ReferentialConstraint>
@@ -178,6 +197,7 @@ warning 6002: The table/view 'PBShop.dbo.Type_Details' does not have a primary k
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="PBShopModelStoreContainer">
+          <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
@@ -185,6 +205,12 @@ warning 6002: The table/view 'PBShop.dbo.Type_Details' does not have a primary k
           <EntitySet Name="ShoppingCart" EntityType="Self.ShoppingCart" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Type" EntityType="Self.Type" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DetailsOder" EntityType="Self.DetailsOder" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [DetailsOder].[ID_Product] AS [ID_Product], 
+    [DetailsOder].[ID_Oder] AS [ID_Oder]
+    FROM [dbo].[DetailsOder] AS [DetailsOder]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="ShoppingCartDetails" EntityType="Self.ShoppingCartDetails" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [ShoppingCartDetails].[Id_Product] AS [Id_Product], 
@@ -205,7 +231,7 @@ warning 6002: The table/view 'PBShop.dbo.Type_Details' does not have a primary k
             <End Role="Promotion" EntitySet="Promotion" />
             <End Role="Product" EntitySet="Product" />
           </AssociationSet>
-          <AssociationSet Name="FK_Product_Type" Association="Self.FK_Product_Type">
+          <AssociationSet Name="FK_Product_Type1" Association="Self.FK_Product_Type1">
             <End Role="Type" EntitySet="Type" />
             <End Role="Product" EntitySet="Product" />
           </AssociationSet>
@@ -230,6 +256,13 @@ warning 6002: The table/view 'PBShop.dbo.Type_Details' does not have a primary k
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="PBShopModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Pass" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
         <EntityType Name="Customer">
           <Key>
             <PropertyRef Name="ID" />
@@ -239,8 +272,21 @@ warning 6002: The table/view 'PBShop.dbo.Type_Details' does not have a primary k
           <Property Name="Password" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
           <Property Name="Phone" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Order_Customer" FromRole="Customer" ToRole="Order" />
           <NavigationProperty Name="ShoppingCarts" Relationship="Self.FK_ShoppingCart_Customer" FromRole="Customer" ToRole="ShoppingCart" />
-          <NavigationProperty Name="Orders" Relationship="PBShopModel.FK_Order_Customer" FromRole="Customer" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="SoDH" />
+          </Key>
+          <Property Name="MaKH" Type="Int32" Nullable="false" />
+          <Property Name="NgayDH" Type="DateTime" Precision="3" />
+          <Property Name="NgayGiaoHang" Type="DateTime" Precision="3" />
+          <Property Name="HTGiaoHang" Type="Boolean" />
+          <Property Name="HTThanhToan" Type="Boolean" />
+          <Property Name="SoDH" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TongTien" Type="Double" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_Order_Customer" FromRole="Order" ToRole="Customer" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -253,11 +299,12 @@ warning 6002: The table/view 'PBShop.dbo.Type_Details' does not have a primary k
           <Property Name="Img" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
           <Property Name="Describe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Id_Type" Type="Int32" Nullable="false" />
-          <Property Name="Id_Promotional" Type="Int32" Nullable="false" />
+          <Property Name="Id_Promotional" Type="Int32" />
           <Property Name="DateAdded" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Promotion" Relationship="Self.FK_Product_Promotion" FromRole="Product" ToRole="Promotion" />
-          <NavigationProperty Name="Type" Relationship="Self.FK_Product_Type" FromRole="Product" ToRole="Type" />
+          <NavigationProperty Name="Type" Relationship="Self.FK_Product_Type1" FromRole="Product" ToRole="Type" />
           <NavigationProperty Name="ShoppingCartDetails" Relationship="Self.FK_ShoppingCartDetails_Product" FromRole="Product" ToRole="ShoppingCartDetails" />
+          <Property Name="Rated" Type="Double" />
         </EntityType>
         <EntityType Name="Promotion">
           <Key>
@@ -294,8 +341,16 @@ warning 6002: The table/view 'PBShop.dbo.Type_Details' does not have a primary k
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NameType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Icon" Type="String" MaxLength="30" FixedLength="true" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Products" Relationship="Self.FK_Product_Type" FromRole="Type" ToRole="Product" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_Product_Type1" FromRole="Type" ToRole="Product" />
           <NavigationProperty Name="Type_Details" Relationship="Self.FK_Type_Details_Type" FromRole="Type" ToRole="Type_Details" />
+        </EntityType>
+        <EntityType Name="DetailsOder">
+          <Key>
+            <PropertyRef Name="ID_Product" />
+            <PropertyRef Name="ID_Oder" />
+          </Key>
+          <Property Name="ID_Product" Type="Int32" Nullable="false" />
+          <Property Name="ID_Oder" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="ShoppingCartDetail">
           <Key>
@@ -316,6 +371,18 @@ warning 6002: The table/view 'PBShop.dbo.Type_Details' does not have a primary k
           <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Type" Relationship="Self.FK_Type_Details_Type" FromRole="Type_Details" ToRole="Type" />
         </EntityType>
+        <Association Name="FK_Order_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="MaKH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ShoppingCart_Customer">
           <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
           <End Role="ShoppingCart" Type="Self.ShoppingCart" Multiplicity="*" />
@@ -329,7 +396,7 @@ warning 6002: The table/view 'PBShop.dbo.Type_Details' does not have a primary k
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Product_Promotion">
-          <End Role="Promotion" Type="Self.Promotion" Multiplicity="1" />
+          <End Role="Promotion" Type="Self.Promotion" Multiplicity="0..1" />
           <End Role="Product" Type="Self.Product" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Promotion">
@@ -340,7 +407,7 @@ warning 6002: The table/view 'PBShop.dbo.Type_Details' does not have a primary k
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Product_Type">
+        <Association Name="FK_Product_Type1">
           <End Role="Type" Type="Self.Type" Multiplicity="1" />
           <End Role="Product" Type="Self.Product" Multiplicity="*" />
           <ReferentialConstraint>
@@ -389,14 +456,21 @@ warning 6002: The table/view 'PBShop.dbo.Type_Details' does not have a primary k
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="PBShopEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Admins" EntityType="Self.Admin" />
           <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="Orders" EntityType="Self.Order" />
           <EntitySet Name="Products" EntityType="Self.Product" />
           <EntitySet Name="Promotions" EntityType="Self.Promotion" />
           <EntitySet Name="ShoppingCarts" EntityType="Self.ShoppingCart" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="Types" EntityType="Self.Type" />
+          <EntitySet Name="DetailsOders" EntityType="Self.DetailsOder" />
           <EntitySet Name="ShoppingCartDetails" EntityType="Self.ShoppingCartDetail" />
           <EntitySet Name="Type_Details" EntityType="Self.Type_Details" />
+          <AssociationSet Name="FK_Order_Customer" Association="Self.FK_Order_Customer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
           <AssociationSet Name="FK_ShoppingCart_Customer" Association="Self.FK_ShoppingCart_Customer">
             <End Role="Customer" EntitySet="Customers" />
             <End Role="ShoppingCart" EntitySet="ShoppingCarts" />
@@ -405,7 +479,7 @@ warning 6002: The table/view 'PBShop.dbo.Type_Details' does not have a primary k
             <End Role="Promotion" EntitySet="Promotions" />
             <End Role="Product" EntitySet="Products" />
           </AssociationSet>
-          <AssociationSet Name="FK_Product_Type" Association="Self.FK_Product_Type">
+          <AssociationSet Name="FK_Product_Type1" Association="Self.FK_Product_Type1">
             <End Role="Type" EntitySet="Types" />
             <End Role="Product" EntitySet="Products" />
           </AssociationSet>
@@ -421,42 +495,21 @@ warning 6002: The table/view 'PBShop.dbo.Type_Details' does not have a primary k
             <End Role="Type" EntitySet="Types" />
             <End Role="Type_Details" EntitySet="Type_Details" />
           </AssociationSet>
-          <EntitySet Name="Orders" EntityType="PBShopModel.Order" />
-          <AssociationSet Name="FK_Order_Customer" Association="PBShopModel.FK_Order_Customer">
-            <End Role="Customer" EntitySet="Customers" />
-            <End Role="Order" EntitySet="Orders" />
-          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="Order">
-          <Key>
-            <PropertyRef Name="SoDH" />
-          </Key>
-          <Property Name="MaKH" Type="Int32" Nullable="false" />
-          <Property Name="NgayDH" Type="DateTime" Precision="3" />
-          <Property Name="NgayGiaoHang" Type="DateTime" Precision="3" />
-          <Property Name="HTGiaoHang" Type="Boolean" />
-          <Property Name="HTThanhToan" Type="Boolean" />
-          <Property Name="SoDH" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="Customer" Relationship="PBShopModel.FK_Order_Customer" FromRole="Order" ToRole="Customer" />
-        </EntityType>
-        <Association Name="FK_Order_Customer">
-          <End Type="PBShopModel.Customer" Role="Customer" Multiplicity="1" />
-          <End Type="PBShopModel.Order" Role="Order" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Customer">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Order">
-              <PropertyRef Name="MaKH" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="PBShopModelStoreContainer" CdmEntityContainer="PBShopEntities">
+          <EntitySetMapping Name="Admins">
+            <EntityTypeMapping TypeName="PBShopModel.Admin">
+              <MappingFragment StoreEntitySet="Admin">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Pass" ColumnName="Pass" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Customers">
             <EntityTypeMapping TypeName="PBShopModel.Customer">
               <MappingFragment StoreEntitySet="Customer">
@@ -468,9 +521,23 @@ warning 6002: The table/view 'PBShop.dbo.Type_Details' does not have a primary k
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="PBShopModel.Order">
+              <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="MaKH" ColumnName="MaKH" />
+                <ScalarProperty Name="NgayDH" ColumnName="NgayDH" />
+                <ScalarProperty Name="NgayGiaoHang" ColumnName="NgayGiaoHang" />
+                <ScalarProperty Name="HTGiaoHang" ColumnName="HTGiaoHang" />
+                <ScalarProperty Name="HTThanhToan" ColumnName="HTThanhToan" />
+                <ScalarProperty Name="SoDH" ColumnName="SoDH" />
+                <ScalarProperty Name="TongTien" ColumnName="TongTien" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="PBShopModel.Product">
               <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="Rated" ColumnName="Rated" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
@@ -520,6 +587,14 @@ warning 6002: The table/view 'PBShop.dbo.Type_Details' does not have a primary k
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="DetailsOders">
+            <EntityTypeMapping TypeName="PBShopModel.DetailsOder">
+              <MappingFragment StoreEntitySet="DetailsOder">
+                <ScalarProperty Name="ID_Product" ColumnName="ID_Product" />
+                <ScalarProperty Name="ID_Oder" ColumnName="ID_Oder" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="ShoppingCartDetails">
             <EntityTypeMapping TypeName="PBShopModel.ShoppingCartDetail">
               <MappingFragment StoreEntitySet="ShoppingCartDetails">
@@ -533,18 +608,6 @@ warning 6002: The table/view 'PBShop.dbo.Type_Details' does not have a primary k
               <MappingFragment StoreEntitySet="Type_Details">
                 <ScalarProperty Name="Id_Type" ColumnName="Id_Type" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Orders">
-            <EntityTypeMapping TypeName="PBShopModel.Order">
-              <MappingFragment StoreEntitySet="Order">
-                <ScalarProperty Name="SoDH" ColumnName="SoDH" />
-                <ScalarProperty Name="HTThanhToan" ColumnName="HTThanhToan" />
-                <ScalarProperty Name="HTGiaoHang" ColumnName="HTGiaoHang" />
-                <ScalarProperty Name="NgayGiaoHang" ColumnName="NgayGiaoHang" />
-                <ScalarProperty Name="NgayDH" ColumnName="NgayDH" />
-                <ScalarProperty Name="MaKH" ColumnName="MaKH" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

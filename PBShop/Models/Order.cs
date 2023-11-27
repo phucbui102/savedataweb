@@ -20,6 +20,7 @@ namespace PBShop.Models
         public Nullable<bool> HTGiaoHang { get; set; }
         public Nullable<bool> HTThanhToan { get; set; }
         public int SoDH { get; set; }
+        public Nullable<double> TongTien { get; set; }
     
         public virtual Customer Customer { get; set; }
     }

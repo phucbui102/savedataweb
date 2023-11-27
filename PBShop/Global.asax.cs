@@ -18,4 +18,5 @@ namespace PBShop
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
     }
+
 }

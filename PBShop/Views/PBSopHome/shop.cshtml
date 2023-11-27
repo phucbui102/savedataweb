@@ -23,17 +23,21 @@
                         {
                             <li class="product-item">
                                 <div class="contain-product layout-02">
-                                    <div class="product-thumb">
-                                        <a href="#" class="link-to-product">
-                                            <img src="~/Theme/assets/images/products/@item.Img" alt="dd" width="270" height="270" class="product-thumnail">
-                                        </a>
-                                    </div>
+                                                        <div class="product-thumb">
+                                                            <a href="#" class="link-to-product">
+                                                                <img src="~/Theme/assets/images/products/@item.Img" alt="dd" width="270" height="270" class="product-thumnail">
+                                                            </a>
+
+                                                            <div class="labels">
+                                                                <span class="sale-label">-50%</span>
+                                                            </div>
+                                                        </div>
                                     <div class="info">
                                         <b class="categories">Fresh Fruit</b>
                                         <h4 class="product-title"><a href="#" class="pr-name">@item.Name</a></h4>
                                         <div class="price">
-                                            <ins><span class="price-amount"><span class="currencySymbol">£</span>85.00</span></ins>
-                                            <del><span class="price-amount"><span class="currencySymbol">£</span>95.00</span></del>
+                                            <ins><span class="price-amount"><span class="currencySymbol">₫</span>85.00</span></ins>
+                                            <del><span class="price-amount"><span class="currencySymbol">₫</span>95.00</span></del>
                                         </div>
                                     </div>
                                 </div>
@@ -61,20 +65,20 @@
                                 <div data-title="Price:" class="selector-item">
                                     <select name="price" class="selector">
                                         <option value="all">Price</option>
-                                        <option value="class-1st">Less than 5$</option>
-                                        <option value="class-2nd">$5-10$</option>
-                                        <option value="class-3rd">$10-20$</option>
-                                        <option value="class-4th">$20-45$</option>
-                                        <option value="class-5th">$45-100$</option>
-                                        <option value="class-6th">$100-150$</option>
-                                        <option value="class-7th">More than 150$</option>
+                                        <option value="class-1st">Less than 5₫</option>
+                                        <option value="class-2nd">₫5-10₫</option>
+                                        <option value="class-3rd">₫10-20₫</option>
+                                        <option value="class-4th">₫20-45₫</option>
+                                        <option value="class-5th">₫45-100₫</option>
+                                        <option value="class-6th">₫100-150₫</option>
+                                        <option value="class-7th">More than 150₫</option>
                                     </select>
                                 </div>
                                 <div data-title="Brand:" class="selector-item">
                                     <select name="brad" class="selector">
                                         <option value="all">Top brands</option>
                                         <option value="br2">Brand first</option>
-                                        <option value="br3">Brand second</option>
+                                        <opton value="br3">Brand second</opton>
                                         <option value="br4">Brand third</option>
                                         <option value="br5">Brand fourth</option>
                                         <option value="br6">Brand fiveth</option>
@@ -143,8 +147,8 @@
                                         <b class="categories">@item.NameType</b>
                                         <h4 class="product-title"><a href="@Url.Action("ProductDetails","PBSopHome", new { id = @item.ID })" class="pr-name">@item.Name</a></h4>
                                         <div class="price">
-                                            <ins><span class="price-amount"><span class="currencySymbol">£</span>@item.Price</span></ins>
-                                            <del><span class="price-amount"><span class="currencySymbol">£</span>@item.Promotional_Price</span></del>
+                                            <ins><span class="price-amount"><span class="currencySymbol">₫</span>@item.Price</span></ins>
+                                            <del><span class="price-amount"><span class="currencySymbol">₫</span>@item.Promotional_Price</span></del>
                                         </div>
                                         @*<div class="shipping-info">
                                                 <p class="shipping-day">3-Day Shipping</p>
@@ -154,16 +158,16 @@
                                             @*<p class="message">All products are carefully selected to ensure food safety.</p>*@
                                             <div class="buttons">
                                                 <a href="#" class="btn wishlist-btn"><i class="fa fa-heart" aria-hidden="true"></i></a>
-                                                <a href=" @Url.Action("ThemGioHang","ShoppingCart", new { ms = @item.ID, url = Request.Url.ToString() @*, @onchange = "this.form.submit();"*@})" class="btn add-to-cart-btn"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i>add to cart</a>
+                                                <a href=" @Url.Action("ThemGioHang","ShoppingCart", new { ms = @item.ID, url = Request.Url.ToString() @*, @onchange = "this.form.submit();"*@})" class="btn add-to-cart-btn"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i>Thêm vào giỏ hàng</a>
                                                 <a href="#" class="btn compare-btn"><i class="fa fa-random" aria-hidden="true"></i></a>
 
                                                 @*@Html.TextBox("myTextBox", new { @class = "jtb", @id = "TrajName", placeholder = "Traj Name" })
 
-                                                $("#TrajectoryName").keyup(function () {
-                                                if ($('#TrajName').val() != "")
-                                                $("#BtnAddTraj").prop('disabled',false);
+                                                ₫("#TrajectoryName").keyup(function () {
+                                                if (₫('#TrajName').val() != "")
+                                                ₫("#BtnAddTraj").prop('disabled',false);
                                                 else
-                                                $("#BtnAddTraj").prop('disabled',true);
+                                                ₫("#BtnAddTraj").prop('disabled',true);
                                                 });*@
                                             </div>
                                         </div>
@@ -206,9 +210,9 @@
                 <span class="biolife-current-panel-title">Sidebar</span>
                 <a class="biolife-close-btn" href="#" data-object="open-mobile-filter">&times;</a>
             </div>
-            <div class="sidebar-contain">
+            @*<div class="sidebar-contain">
                 <div class="widget biolife-filter">
-                    <h4 class="wgt-title">Departements</h4>
+                    <h4 class="wgt-title">Thương Hiệu</h4>
                     <div class="wgt-content">
                         <ul class="cat-list">
                             <li class="cat-list-item"><a href="#" class="cat-link">Organic Food</a></li>
@@ -216,7 +220,7 @@
                             <li class="cat-list-item"><a href="#" class="cat-link">Dried Fruits</a></li>
                         </ul>
                     </div>
-                </div>
+                </div>*@
 
                 @*<div class="widget biolife-filter">
                         <h4 class="wgt-title">Shipping & Pickup</h4>
@@ -241,11 +245,11 @@
 
                                 @*<form action="#" name="price-filter" id="price-filter" method="get">*@
                                 <p class="f-item">
-                                    <label for="pr-from">$</label>
+                                    <label for="pr-from">₫</label>
                                     <input class="input-number" type="number" id="pr-from" value="@ViewBag.PrFrom" name="Pr_From" @*step="10000"*@>
                                 </p>
                                 <p class="f-item">
-                                    <label for="pr-to">to $</label>
+                                    <label for="pr-to">to ₫</label>
                                     <input class="input-number" type="number" id="pr-to" value="@ViewBag.PrTo" name="Pr_To">
                                 </p>
                                 <p class="f-item"><button class="btn-submit" type="submit">go</button></p>
@@ -256,20 +260,20 @@
                             }
                         </div>
                         <ul class="check-list bold single">
-                            <li class="check-list-item"><a href="#" class="check-link">$0 - $5</a></li>
-                            <li class="check-list-item"><a href="#" class="check-link">$5 - $10</a></li>
-                            <li class="check-list-item"><a href="#" class="check-link">$15 - $20</a></li>
+                            <li class="check-list-item"><a href="#" class="check-link">₫0 - ₫5</a></li>
+                            <li class="check-list-item"><a href="#" class="check-link">₫5 - ₫10</a></li>
+                            <li class="check-list-item"><a href="#" class="check-link">₫15 - ₫20</a></li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="widget biolife-filter">
-                    <h4 class="wgt-title">Brand</h4>
+                    <h4 class="wgt-title">Thương Hiệu</h4>
                     <div class="wgt-content">
                         <ul class="check-list multiple">
-                            <li class="check-list-item"><a href="#" class="check-link">Great Value Organic</a></li>
-                            <li class="check-list-item"><a href="#" class="check-link">Plum Organic</a></li>
-                            <li class="check-list-item"><a href="#" class="check-link">Shop to Home</a></li>
+                            <li class="check-list-item"><a href="#" class="check-link">PB Organic</a></li>
+                            <li class="check-list-item"><a href="#" class="check-link">Mercury Shop</a></li>
+                            <li class="check-list-item"><a href="#" class="check-link">DK-D'LENKA</a></li>
                         </ul>
                     </div>
                 </div>
@@ -286,7 +290,7 @@
                         </div>
                     </div>*@
 
-                <div class="widget biolife-filter">
+                @*<div class="widget biolife-filter">
                     <h4 class="wgt-title">Popular Size</h4>
                     <div class="wgt-content">
                         <ul class="check-list bold multiple">
@@ -296,7 +300,7 @@
                             <li class="check-list-item"><a href="#" class="check-link">30oz</a></li>
                         </ul>
                     </div>
-                </div>
+                </div>*@
 
                 @*<div class="widget biolife-filter">
                         <h4 class="wgt-title">Number of Pieces</h4>
@@ -309,17 +313,17 @@
                     </div>*@
 
                 <div class="widget biolife-filter">
-                    <h4 class="wgt-title">Recently Viewed</h4>
+                    <h4 class="wgt-title">Gợi ý</h4>
                     <div class="wgt-content">
                         <ul class="products">
                             @{
-                                var Listb = (from a in db.Products
-                                             orderby a.DateAdded descending
-                                             select a).Take(3);
+                                //var Listb = (from a in db.Products
+                                //             orderby a.DateAdded descending
+                                //             select a).Take(3);
 
 
 
-                                foreach (var item in Listb)
+                                foreach (var item in ViewBag.Listb)
                                 {
 
                                     <li class="pr-item">
@@ -331,10 +335,10 @@
                                             </div>
                                             <div class="info">
                                                 <b class="categories">@item.Name</b>
-                                                <h4 class="product-title"><a href="#" class="pr-name" tabindex="0">National Fresh Fruit</a></h4>
+                                                <h4 class="product-title"><a href="#" class="pr-name" tabindex="0">@item.NameType</a></h4>
                                                 <div class="price">
-                                                    <ins><span class="price-amount"><span class="currencySymbol">£</span>85.00</span></ins>
-                                                    <del><span class="price-amount"><span class="currencySymbol">£</span>95.00</span></del>
+                                                    <ins><span class="price-amount"><span class="currencySymbol">₫</span>85.00</span></ins>
+                                                    <del><span class="price-amount"><span class="currencySymbol">₫</span>95.00</span></del>
                                                 </div>
                                             </div>
                                         </div>
@@ -347,14 +351,14 @@
                 </div>
 
                 <div class="widget biolife-filter">
-                    <h4 class="wgt-title">Product Tags</h4>
+                    <h4 class="wgt-title">Tags</h4>
                     <div class="wgt-content">
                         <ul class="tag-cloud">
-                            <li class="tag-item"><a href="#" class="tag-link">Fresh Fruit</a></li>
-                            <li class="tag-item"><a href="#" class="tag-link">Natural Food</a></li>
+                            
+                            <li class="tag-item"><a href="#" class="tag-link">Bán chạy</a></li>
                             <li class="tag-item"><a href="#" class="tag-link">Hot</a></li>
-                            <li class="tag-item"><a href="#" class="tag-link">Organics</a></li>
-                            <li class="tag-item"><a href="#" class="tag-link">Dried Organic</a></li>
+                            <li class="tag-item"><a href="#" class="tag-link">Top đánh giá</a></li>
+                            <li class="tag-item"><a href="#" class="tag-link">New</a></li>
                         </ul>
                     </div>
                 </div>

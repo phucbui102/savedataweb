@@ -30,7 +30,8 @@ namespace PBShop.Controllers
                           Describe = s.Describe,
                           DateAdded = s.DateAdded,
                           NameType = c.NameType,
-                          Id_Type = c.ID
+                          Id_Type = c.ID,
+                          Rated = (double)s.Rated
                       });
 
 
@@ -40,6 +41,7 @@ namespace PBShop.Controllers
 
             ViewBag.OSProduct = LP.OrderBy("DateAdded" + " desc");
 
+            ViewBag.SaleOnDay = LP.OrderBy("DateAdded" + " desc").Take(4);
             return View();
 
 
@@ -183,7 +185,7 @@ namespace PBShop.Controllers
             page = page ?? 1; //if (page == null) page = 1;
 
             // 3.4. Tạo kích thước trang (pageSize), mặc định là 5.
-            int pageSize = (size ?? 3);
+            int pageSize = (size ?? 9);
 
             ViewBag.pageSize = pageSize;
 
@@ -197,7 +199,7 @@ namespace PBShop.Controllers
             //if (pageNumber > checkTotal) pageNumber = checkTotal;
 
             // 4. Trả kết quả về Views
-
+            ViewBag.Listb = LP.Take(3);
             List<SelectListItem> items = new List<SelectListItem>();
             items.Add(new SelectListItem { Text = "Giá: Tăng Dần", Value = "asc" });
             items.Add(new SelectListItem { Text = "Giá: Giảm Dần", Value = "desc" });

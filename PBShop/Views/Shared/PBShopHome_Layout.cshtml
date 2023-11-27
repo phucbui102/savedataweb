@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Biolife - Organic Food</title>
+    <title>PB Shop</title>
     <link href="https://fonts.googleapis.com/css?family=Cairo:400,600,700&amp;display=swap"
           rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Poppins:600&amp;display=swap"
@@ -24,11 +24,8 @@
     <link rel="stylesheet" href="~/Theme/assets/css/style.css" />
     <link rel="stylesheet" href="~/Theme/assets/css/main-color04.css" />
     <link href="~/Theme/assets/css/Edit.css" rel="stylesheet" />
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-          integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-          crossorigin="anonymous"
-          referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <meta property="og:url" content="https://www.your-domain.com/your-page.html" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Your Website Title" />
@@ -56,6 +53,12 @@
             a.btn.btn-submit.btn-bold.cancelbtnP:hover {
                 background-color: #444444;
             }
+
+
+        .nice-select.DrList .list {
+            height: 190px;
+        }
+           
     </style>
 </head>
 <body class="biolife-body">
@@ -91,16 +94,16 @@
                 <div class="top-bar right">
                     <ul class="social-list">
                         <li>
-                            <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                            <a href="#"><i class="fa-brands fa-twitter"></i></a>
                         </li>
                         <li>
                             <a href="#">
-                                <i class="fa fa-facebook" aria-hidden="true"></i>
+                               <i class="fa-brands fa-facebook-f"></i>
                             </a>
                         </li>
                         <li>
                             <a href="#">
-                                <i class="fa fa-pinterest" aria-hidden="true"></i>
+                                <i class="fa-brands fa-instagram"></i>
                             </a>
                         </li>
                     </ul>
@@ -227,7 +230,7 @@
                                 </li> -->
                                 <li class="menu-item menu-item-has-children has-child">
                                     <a href="@Url.Action("shop","PBSopHome")" class="menu-name" data-title="Product">Cửa Hàng</a>
-                                    <ul class="sub-menu">
+                                    <!--<ul class="sub-menu">-->
                                         <!-- <li class="menu-item menu-item-has-children has-child"  style="display: flex; align-items: center;">
                                           <a
                                             href="#"
@@ -260,7 +263,7 @@
                                             </li>
                                           </ul>
                                         </li> -->
-                                        <li class="menu-item menu-item-has-children has-child">
+                                        <!--<li class="menu-item menu-item-has-children has-child">
                                             <a href="#"
                                                class="menu-name"
                                                data-title="Eggs & other considerations">Eggs & other considerations</a>
@@ -398,7 +401,7 @@
                                         </li>
 
 
-                                    </ul>
+                                    </ul>-->
                                 </li>
                                 <!-- <li class="menu-item menu-item-has-children has-megamenu">
                                   <a href="#" class="menu-name" data-title="Pages">Demo</a>
@@ -551,127 +554,128 @@
                                     </div>
                                   </div>
                                 </li>  -->
-                                <li class="menu-item menu-item-has-children has-megamenu">
+                                <li class="menu-item ">
+                                    @*menu-item-has-children has-megamenu*@
                                     <a href="#" class="menu-name" data-title="Blog">Blog</a>
-                                    <div class="wrap-megamenu lg-width-800 md-width-750">
-                                        <div class="mega-content">
-                                            <div class="col-lg-3 col-md-3 col-xs-6">
-                                                <div class="wrap-custom-menu vertical-menu">
-                                                    <h4 class="menu-title">Blog Categories</h4>
-                                                    <ul class="menu">
-                                                        <li><a href="#">Beauty (30)</a></li>
-                                                        <li><a href="#">Fashion (50)</a></li>
-                                                        <li><a href="#">Food (10)</a></li>
-                                                        <li><a href="#">Life Style (60)</a></li>
-                                                        <li><a href="#">Travel (10)</a></li>
-                                                        <li><a href="#">Nutrition (35)</a></li>
-                                                        <li><a href="#">Food Decoration (45)</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3 col-md-3 col-xs-6">
-                                                <div class="wrap-custom-menu vertical-menu">
-                                                    <h4 class="menu-title">Featured Posts</h4>
-                                                    <ul class="menu">
-                                                        <li>
-                                                            <a href="#">Post example<sup>#1</sup></a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#">Post example<sup>#2</sup></a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#">Post example<sup>#3</sup></a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#">Post example<sup>#4</sup></a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#">Post example<sup>#5</sup></a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#">Post example<sup>#6</sup></a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#">Post example<sup>#7</sup></a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6 col-xs-12 md-margin-top-0 xs-margin-top-25px">
-                                                <div class="block-posts">
-                                                    <h4 class="menu-title">Recent Posts</h4>
-                                                    <ul class="posts">
-                                                        <li>
-                                                            <div class="block-post-item">
-                                                                <div class="thumb">
-                                                                    <a href="#">
-                                                                        <img src="~/Theme/assets/images/megamenu/thumb-05.jpg"
-                                                                             width="100"
-                                                                             height="73"
-                                                                             alt="" />
-                                                                    </a>
-                                                                </div>
-                                                                <div class="left-info">
-                                                                    <h4 class="post-name">
-                                                                        <a href="#">
-                                                                            Ashwagandha: The #1 Herb in the World
-                                                                            for Anxiety?
-                                                                        </a>
-                                                                    </h4>
-                                                                    <span class="p-date">Jan 05, 2019</span>
-                                                                    <span class="p-comment">2 Comments</span>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="block-post-item">
-                                                                <div class="thumb">
-                                                                    <a href="#">
-                                                                        <img src="~/Theme/assets/images/megamenu/thumb-06.jpg"
-                                                                             width="100"
-                                                                             height="73"
-                                                                             alt="" />
-                                                                    </a>
-                                                                </div>
-                                                                <div class="left-info">
-                                                                    <h4 class="post-name">
-                                                                        <a href="#">
-                                                                            Ashwagandha: The #1 Herb in the World
-                                                                            for Anxiety?
-                                                                        </a>
-                                                                    </h4>
-                                                                    <span class="p-date">May 15, 2019</span>
-                                                                    <span class="p-comment">8 Comments</span>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="block-post-item">
-                                                                <div class="thumb">
-                                                                    <a href="#">
-                                                                        <img src="~/Theme/assets/images/megamenu/thumb-07.jpg"
-                                                                             width="100"
-                                                                             height="73"
-                                                                             alt="" />
-                                                                    </a>
-                                                                </div>
-                                                                <div class="left-info">
-                                                                    <h4 class="post-name">
-                                                                        <a href="#">
-                                                                            Ashwagandha: The #1 Herb in the World
-                                                                            for Anxiety?
-                                                                        </a>
-                                                                    </h4>
-                                                                    <span class="p-date">Apr 26, 2019</span>
-                                                                    <span class="p-comment">10 Comments</span>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
+                                    @*<div class="wrap-megamenu lg-width-800 md-width-750">
+            <div class="mega-content">
+                <div class="col-lg-3 col-md-3 col-xs-6">
+                    <div class="wrap-custom-menu vertical-menu">
+                        <h4 class="menu-title">Blog Categories</h4>
+                        <ul class="menu">
+                            <li><a href="#">Beauty (30)</a></li>
+                            <li><a href="#">Fashion (50)</a></li>
+                            <li><a href="#">Food (10)</a></li>
+                            <li><a href="#">Life Style (60)</a></li>
+                            <li><a href="#">Travel (10)</a></li>
+                            <li><a href="#">Nutrition (35)</a></li>
+                            <li><a href="#">Food Decoration (45)</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-xs-6">
+                    <div class="wrap-custom-menu vertical-menu">
+                        <h4 class="menu-title">Featured Posts</h4>
+                        <ul class="menu">
+                            <li>
+                                <a href="#">Post example<sup>#1</sup></a>
+                            </li>
+                            <li>
+                                <a href="#">Post example<sup>#2</sup></a>
+                            </li>
+                            <li>
+                                <a href="#">Post example<sup>#3</sup></a>
+                            </li>
+                            <li>
+                                <a href="#">Post example<sup>#4</sup></a>
+                            </li>
+                            <li>
+                                <a href="#">Post example<sup>#5</sup></a>
+                            </li>
+                            <li>
+                                <a href="#">Post example<sup>#6</sup></a>
+                            </li>
+                            <li>
+                                <a href="#">Post example<sup>#7</sup></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-xs-12 md-margin-top-0 xs-margin-top-25px">
+                    <div class="block-posts">
+                        <h4 class="menu-title">Recent Posts</h4>
+                        <ul class="posts">
+                            <li>
+                                <div class="block-post-item">
+                                    <div class="thumb">
+                                        <a href="#">
+                                            <img src="~/Theme/assets/images/megamenu/thumb-05.jpg"
+                                                 width="100"
+                                                 height="73"
+                                                 alt="" />
+                                        </a>
                                     </div>
+                                    <div class="left-info">
+                                        <h4 class="post-name">
+                                            <a href="#">
+                                                Ashwagandha: The #1 Herb in the World
+                                                for Anxiety?
+                                            </a>
+                                        </h4>
+                                        <span class="p-date">Jan 05, 2019</span>
+                                        <span class="p-comment">2 Comments</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="block-post-item">
+                                    <div class="thumb">
+                                        <a href="#">
+                                            <img src="~/Theme/assets/images/megamenu/thumb-06.jpg"
+                                                 width="100"
+                                                 height="73"
+                                                 alt="" />
+                                        </a>
+                                    </div>
+                                    <div class="left-info">
+                                        <h4 class="post-name">
+                                            <a href="#">
+                                                Ashwagandha: The #1 Herb in the World
+                                                for Anxiety?
+                                            </a>
+                                        </h4>
+                                        <span class="p-date">May 15, 2019</span>
+                                        <span class="p-comment">8 Comments</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="block-post-item">
+                                    <div class="thumb">
+                                        <a href="#">
+                                            <img src="~/Theme/assets/images/megamenu/thumb-07.jpg"
+                                                 width="100"
+                                                 height="73"
+                                                 alt="" />
+                                        </a>
+                                    </div>
+                                    <div class="left-info">
+                                        <h4 class="post-name">
+                                            <a href="#">
+                                                Ashwagandha: The #1 Herb in the World
+                                                for Anxiety?
+                                            </a>
+                                        </h4>
+                                        <span class="p-date">Apr 26, 2019</span>
+                                        <span class="p-comment">10 Comments</span>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>*@
                                 </li>
                                 <li class="menu-item"><a href="@Url.Action("Contact","PBSopHome")">Liên Hệ</a></li>
                             </ul>
@@ -802,7 +806,7 @@
                     <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                         <section class="footer-item">
                             <a href="home-04.html" class="logo footer-logo">
-                                <img src="~/Theme/assets/images/organic-4.png"
+                                <img src="~/Theme/assets/images/pb_SHOP.png"
                                      alt="biolife logo"
                                      width="135"
                                      height="36" />
@@ -852,23 +856,23 @@
                                 <ul class="menu">
                                     <li>
                                         <a href="#" title="twitter" class="socail-btn">
-                                            <i class="fa fa-twitter" aria-hidden="true"></i>Twitter
+                                            <i class="fa-brands fa-twitter"></i>Twitter
                                         </a>
                                     </li>
                                     <li>
                                         <a href="#" title="facebook" class="socail-btn">
-                                            <i class="fa fa-facebook" aria-hidden="true"></i>Facebook
+                                           <i class="fa-brands fa-facebook-f"></i>Facebook
                                         </a>
                                     </li>
 
                                     <li>
                                         <a href="#" title="youtube" class="socail-btn">
-                                            <i class="fa fa-youtube" aria-hidden="true"></i>Youtube
+                                            <i class="fa-brands fa-youtube"></i></i>Youtube
                                         </a>
                                     </li>
                                     <li>
                                         <a href="#" title="instagram" class="socail-btn">
-                                            <i class="fa fa-instagram" aria-hidden="true"></i>Instagram
+                                            <i class="fa-brands fa-instagram"></i>Instagram
                                         </a>
                                     </li>
                                 </ul>
@@ -1106,7 +1110,7 @@
 
     <script src="~/Theme/assets/js/jquery-3.4.1.min.js"></script>
     <script src="~/Theme/assets/js/bootstrap.min.js"></script>
-    <script src="~/Theme/assets/js/jquery.countdown.min.js"></script>
+    @*<script src="~/Theme/assets/js/jquery.countdown.min.js"></script>*@
     <script src="~/Theme/assets/js/jquery.nice-select.min.js"></script>
     <script src="~/Theme/assets/js/jquery.nicescroll.min.js"></script>
     <script src="~/Theme/assets/js/slick.min.js"></script>
@@ -1115,5 +1119,36 @@
 
     @*@RenderSection("Scripts", required: false);*@
     @RenderSection("Scriptss", required: false);
+
+    <script>
+        function makeTimer() {
+
+            //		var endTime = new Date("29 April 2018 9:56:00 GMT+01:00");
+            var endTime = new Date("11 /10/ 2023 /12:00:00 GMT+07:00");
+            endTime = (Date.parse(endTime) / 1000);
+
+            var now = new Date();
+            now = (Date.parse(now) / 1000);
+
+            var timeLeft = endTime - now;
+
+            var days = Math.floor(timeLeft / 86400);
+            var hours = Math.floor((timeLeft - (days * 86400)) / 3600);
+            var minutes = Math.floor((timeLeft - (days * 86400) - (hours * 3600)) / 60);
+            var seconds = Math.floor((timeLeft - (days * 86400) - (hours * 3600) - (minutes * 60)));
+
+            if (hours < "10") { hours = "0" + hours; }
+            if (minutes < "10") { minutes = "0" + minutes; }
+            if (seconds < "10") { seconds = "0" + seconds; }
+
+            $("#days").html(days);
+            $("#hours").html(hours);
+            $("#minutes").html(minutes);
+            $("#seconds").html(seconds);
+
+        }
+
+        setInterval(function () { makeTimer(); }, 1000);
+    </script>
 </body>
 </html>

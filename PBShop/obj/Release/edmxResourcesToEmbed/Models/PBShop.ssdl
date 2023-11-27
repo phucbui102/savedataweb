@@ -1,19 +1,43 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="PBShopModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'PBShop.dbo.Customer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-  <EntityType Name="Customer">
+  <EntityType Name="Admin">
     <Key>
-      <PropertyRef Name="Email" />
-      <PropertyRef Name="Name" />
-      <PropertyRef Name="Password" />
       <PropertyRef Name="ID" />
     </Key>
-    <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="Password" Type="char" MaxLength="20" Nullable="false" />
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Pass" Type="nchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="Email" Type="varchar" MaxLength="50" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+    <Property Name="Password" Type="char" MaxLength="20" />
     <Property Name="Phone" Type="char" MaxLength="10" />
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'PBShop.dbo.DetailsOder' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="DetailsOder">
+    <Key>
+      <PropertyRef Name="ID_Product" />
+      <PropertyRef Name="ID_Oder" />
+    </Key>
+    <Property Name="ID_Product" Type="int" Nullable="false" />
+    <Property Name="ID_Oder" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="SoDH" />
+    </Key>
+    <Property Name="MaKH" Type="int" Nullable="false" />
+    <Property Name="NgayDH" Type="datetime" />
+    <Property Name="NgayGiaoHang" Type="datetime" />
+    <Property Name="HTGiaoHang" Type="bit" />
+    <Property Name="HTThanhToan" Type="bit" />
+    <Property Name="SoDH" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TongTien" Type="float" />
   </EntityType>
   <EntityType Name="Product">
     <Key>
@@ -26,8 +50,9 @@ warning 6002: The table/view 'PBShop.dbo.Customer' does not have a primary key d
     <Property Name="Img" Type="char" MaxLength="30" />
     <Property Name="Describe" Type="nvarchar(max)" />
     <Property Name="Id_Type" Type="int" Nullable="false" />
-    <Property Name="Id_Promotional" Type="int" Nullable="false" />
-    <Property Name="DateAdded" Type="smalldatetime" />
+    <Property Name="Id_Promotional" Type="int" />
+    <Property Name="DateAdded" Type="date" />
+    <Property Name="Rated" Type="float" />
   </EntityType>
   <EntityType Name="Promotion">
     <Key>
@@ -82,8 +107,20 @@ warning 6002: The table/view 'PBShop.dbo.Type_Details' does not have a primary k
     <Property Name="Id_Type" Type="int" Nullable="false" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
+  <Association Name="FK_Order_Customer">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+    <End Role="Order" Type="Self.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="MaKH" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Product_Promotion">
-    <End Role="Promotion" Type="Self.Promotion" Multiplicity="1" />
+    <End Role="Promotion" Type="Self.Promotion" Multiplicity="0..1" />
     <End Role="Product" Type="Self.Product" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Promotion">
@@ -94,7 +131,7 @@ warning 6002: The table/view 'PBShop.dbo.Type_Details' does not have a primary k
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Product_Type">
+  <Association Name="FK_Product_Type1">
     <End Role="Type" Type="Self.Type" Multiplicity="1" />
     <End Role="Product" Type="Self.Product" Multiplicity="*" />
     <ReferentialConstraint>
@@ -103,6 +140,18 @@ warning 6002: The table/view 'PBShop.dbo.Type_Details' does not have a primary k
       </Principal>
       <Dependent Role="Product">
         <PropertyRef Name="Id_Type" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ShoppingCart_Customer">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+    <End Role="ShoppingCart" Type="Self.ShoppingCart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ShoppingCart">
+        <PropertyRef Name="IdCustomer" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -143,19 +192,19 @@ warning 6002: The table/view 'PBShop.dbo.Type_Details' does not have a primary k
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="PBShopModelStoreContainer">
+    <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Promotion" EntityType="Self.Promotion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ShoppingCart" EntityType="Self.ShoppingCart" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Type" EntityType="Self.Type" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Customer" EntityType="Self.Customer" store:Type="Tables" store:Schema="dbo">
+    <EntitySet Name="DetailsOder" EntityType="Self.DetailsOder" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
-    [Customer].[Email] AS [Email], 
-    [Customer].[Name] AS [Name], 
-    [Customer].[Password] AS [Password], 
-    [Customer].[Phone] AS [Phone], 
-    [Customer].[ID] AS [ID]
-    FROM [dbo].[Customer] AS [Customer]</DefiningQuery>
+    [DetailsOder].[ID_Product] AS [ID_Product], 
+    [DetailsOder].[ID_Oder] AS [ID_Oder]
+    FROM [dbo].[DetailsOder] AS [DetailsOder]</DefiningQuery>
     </EntitySet>
     <EntitySet Name="ShoppingCartDetails" EntityType="Self.ShoppingCartDetails" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
@@ -169,13 +218,21 @@ warning 6002: The table/view 'PBShop.dbo.Type_Details' does not have a primary k
     [Type_Details].[Name] AS [Name]
     FROM [dbo].[Type_Details] AS [Type_Details]</DefiningQuery>
     </EntitySet>
+    <AssociationSet Name="FK_Order_Customer" Association="Self.FK_Order_Customer">
+      <End Role="Customer" EntitySet="Customer" />
+      <End Role="Order" EntitySet="Order" />
+    </AssociationSet>
     <AssociationSet Name="FK_Product_Promotion" Association="Self.FK_Product_Promotion">
       <End Role="Promotion" EntitySet="Promotion" />
       <End Role="Product" EntitySet="Product" />
     </AssociationSet>
-    <AssociationSet Name="FK_Product_Type" Association="Self.FK_Product_Type">
+    <AssociationSet Name="FK_Product_Type1" Association="Self.FK_Product_Type1">
       <End Role="Type" EntitySet="Type" />
       <End Role="Product" EntitySet="Product" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ShoppingCart_Customer" Association="Self.FK_ShoppingCart_Customer">
+      <End Role="Customer" EntitySet="Customer" />
+      <End Role="ShoppingCart" EntitySet="ShoppingCart" />
     </AssociationSet>
     <AssociationSet Name="FK_ShoppingCartDetails_Product" Association="Self.FK_ShoppingCartDetails_Product">
       <End Role="Product" EntitySet="Product" />

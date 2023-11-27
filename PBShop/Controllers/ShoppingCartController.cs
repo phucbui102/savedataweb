@@ -40,18 +40,26 @@ namespace PBShop.Controllers
 
         public ActionResult ThemGioHang(int ms, string url)
         {
-            List<ProductModel> lstGioHang = LayGioHang();
-            ProductModel sp = lstGioHang.Find(n => n.IDP == ms);
-            if (sp == null)
-            {
-                sp = new ProductModel(ms);
-                lstGioHang.Add(sp);
-            }
-            else
-            {
-                sp.SoLuongP++;
-            }
-             return Redirect(url);
+            //if(Session["Customers"] == null)
+            //{
+            //    return RedirectToAction("Login", "User");
+            //} 
+            //else
+            //{
+                List<ProductModel> lstGioHang = LayGioHang();
+                ProductModel sp = lstGioHang.Find(n => n.IDP == ms);
+                if (sp == null)
+                {
+                    sp = new ProductModel(ms);
+                    lstGioHang.Add(sp);
+                }
+                else
+                {
+                    sp.SoLuongP++;
+                }
+                return Redirect(url);
+            //}    
+           
         }
 
         public ActionResult ShopCart()
@@ -62,7 +70,7 @@ namespace PBShop.Controllers
             //    return RedirectToAction("Index", "PBSopHome");
             //}
             ViewBag.TongSoLuong = TongSoLuong();
-            //ViewBag.TongTien = TongTien();
+            ViewBag.TongTien = TongTien();
             return PartialView(lstGioHang);
         }
 
@@ -108,7 +116,7 @@ namespace PBShop.Controllers
             ProductModel sp = lstGioHang.Find(n => n.IDP == ms);
             sp.SoLuongP++;
             var Thanhtien = sp.dThanhTien;
-            return Content(Thanhtien.ToString());
+            return Content(string.Format("{0:#,##0,0}", Thanhtien));
         }
 
 
@@ -116,13 +124,18 @@ namespace PBShop.Controllers
         {
             List<ProductModel> lstGioHang = LayGioHang();
             ProductModel sp = lstGioHang.Find(n => n.IDP == ms);
-            sp.SoLuongP--;
+            if(sp.SoLuongP>1)
+            {
+                sp.SoLuongP--;
+            }    
+            
             var Thanhtien = sp.dThanhTien;
             return Content(Thanhtien.ToString());
         }
         private int TongSoLuong()
         {
             int iTongSoLuong = 0;
+            
             List<ProductModel> lstGioHang = Session["GioHang"] as List<ProductModel>;
             if (lstGioHang != null)
             {
@@ -144,13 +157,23 @@ namespace PBShop.Controllers
         private double TongTien()
         {
             double dTongTien = 0;
-            List<ProductModel> lstGioHang = Session["GioHang"] as List<ProductModel>;
+            List<ProductModel> lstGioHang = Session["DSThanhToan"] as List<ProductModel>;
             if (lstGioHang != null)
             {
                 dTongTien = lstGioHang.Sum(n => n.dThanhTien);
             }
             return dTongTien;
         }
+
+
+        public ActionResult hehe()
+        {
+            double dTongTien = 0;
+            dTongTien = TongTien();
+            return Content(string.Format("{0:#,##0,0}", dTongTien));
+        }
+
+
 
 
         public ActionResult XoaGioHang(string url)
@@ -174,7 +197,28 @@ namespace PBShop.Controllers
         //    return View(Products.SingleOrDefault());
         //}
 
-       
+        [HttpPost]
+        public ActionResult Taodstt(List<int> selectedValues)
+        {
+            double dTongTien = 0;
+            Session["DSThanhToan"] = null;
+            List<ProductModel> lstSPThanhToan = LayDsSpThanhToan();
+            List<ProductModel> lstGioHang = LayGioHang();
+
+            if (selectedValues != null)
+            {
+                foreach (var id in selectedValues)
+                {
+                    ProductModel sp = lstGioHang.Find(n => n.IDP == id);
+                    lstSPThanhToan.Add(sp);
+                }
+            }
+
+            dTongTien = TongTien();
+
+
+            return Content(string.Format("{0:#,##0,0}", dTongTien));
+        }
 
         [HttpPost]
         public ActionResult DatHang(List<int> selectedValues)

@@ -12,7 +12,7 @@
     <div class="shopping-cart-container">
         <div class="row">
             <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
-                <h3 class="box-title">Your cart items</h3>
+                <h3 class="box-title">Giỏ Hàng</h3>
                 @using (Html.BeginForm(new { @class = "shopping-cart-form" }))
                 {
                     <table class="shop_table cart-form">
@@ -44,8 +44,8 @@
                                 </td>
                                 <td class="product-price" data-title="Price">
                                     <div class="price price-contain">
-                                        <ins><span class="price-amount"><span class="currencySymbol">₫</span>@item.PricePromotionalP</span></ins>
-                                        <del><span class="price-amount"><span class="currencySymbol">₫</span>@item.PriceP</span></del>
+                                        <ins><span class="price-amount"><span class="currencySymbol">₫</span>@string.Format("{0:#,##0,0}", @item.PricePromotionalP)</span></ins>
+                                        <del><span class="price-amount"><span class="currencySymbol">₫</span>@string.Format("{0:#,##0,0}", @item.PriceP)</span></del>
                                     </div>
                                 </td>
                                 @*<a href="@Url.Action("ThemGioHang","ShoppingCart", new { ms = @item.IDP })" class="a">
@@ -89,7 +89,7 @@
         </td>*@
                                 <td class="product-subtotal" data-title="Total">
                                     <div class="price price-contain">
-                                        <ins><span class="price-amount  ">₫<span class="currencySymbol" id="HienThi_@item.IDP">@item.dThanhTien</span></span></ins>
+                                        <ins><span class="price-amount  ">₫<span class="currencySymbol" id="HienThi_@item.IDP">@string.Format("{0:#,##0,0}", @item.dThanhTien)</span></span></ins>
                                         @*<del><span class="price-amount"><span class="currencySymbol">£</span>@item.PricePromotionalP</span></del>*@
                                     </div>
                                 </td>
@@ -116,16 +116,16 @@
                 <div class="shpcart-subtotal-block">
                     <div class="subtotal-line">
                         <b class="stt-name">Tổng<span class="sub"> (@Model.Count() Sản Phẩm)</span></b>
-                        <span class="stt-price">₫<span id="total-price"></span></span>
+                        <span class="stt-price">₫<span id="total-price">@string.Format("{0:#,##0,0}", @ViewBag.TongTien)</span></span>
                     </div>
                     <div class="subtotal-line">
                         <b class="stt-name">Phí Vận Chuyển</b>
                         <span class="stt-price">₫0.00</span>
                     </div>
-                    <div class="tax-fee">
-                        <p class="title">Est. Taxes & Fees</p>
+                    <!--<div class="tax-fee">
+                        <p class="title">Est. Taxes & Fees</p>-->
                         @*<p class="desc">Based on 56789</p>*@
-                    </div>
+                    <!--</div>-->
                     <div class="btn-checkout">
                         <a href="@Url.Action("DatHang","ShoppingCart")" class="btn checkout">Thanh Toán</a>
                     </div>
@@ -345,7 +345,23 @@
 @section Scriptss{
     <script type="text/javascript" src="~/js/jquery.min.js"></script>
     <script>
+
+         @*function USP() {
+
+             $.ajax({
+            url: '@Url.Action("hehe", "ShoppingCart")',
+            type: 'GET',
+
+                 success: function (data) {
+                     $("#total-price").html(data);
+                            }
+                });
+        };*@
+
+
+
         function Increase(id) {
+
              $.ajax({
             url: '@Url.Action("TangLen", "ShoppingCart")',
             type: 'GET',
@@ -353,28 +369,57 @@
                  success: function (data) {
                      /*$("#" + id).html(data);*/
                      $("#HienThi_" + id).html(data);
+                     updateTotalPrice();
+                            }
+             });
+
+        }
+
+        function updateTotalPrice() {
+
+             $.ajax({
+            url: '@Url.Action("hehe", "ShoppingCart")',
+            type: 'GET',
+
+                 success: function (data) {
+                     $("#total-price").html(data);
                             }
                 });
+
         }
 
         function Decrease(id) {
+
              $.ajax({
             url: '@Url.Action("GiamXuong", "ShoppingCart")',
             type: 'GET',
                  data: { ms: id },
                  success: function (data) {
                      $("#HienThi_" + id).html(data);
+                     updateTotalPrice();
+                            }
+             });
+            $.ajax({
+            url: '@Url.Action("hehe", "ShoppingCart")',
+            type: 'GET',
+
+                 success: function (data) {
+                     $("#total-price").html(data);
                             }
                 });
         }
 
+
+
         $(document).ready(function () {
             $(".checkout").click(function () {
+
+
             var selectedValues = [];
             $(".my-checkbox:checked").each(function () {
                 selectedValues.push($(this).val());
             });
-                
+
                 if (selectedValues.length > 0) {
                     $.ajax({
                     url: '@Url.Action("DatHang", "ShoppingCart")',
@@ -384,6 +429,46 @@
                     }
                 });
             }
+        });
+    });
+
+
+
+
+        $(document).ready(function () {
+            $(".my-checkbox").change(function () {
+
+
+
+
+                var selectedValues = [];
+                $(".my-checkbox:checked").each(function () {
+                    selectedValues.push($(this).val());
+                });
+
+                    $.ajax({
+                        url: '@Url.Action("Taodstt", "ShoppingCart")',
+                        type: 'POST',
+                        data: { selectedValues: selectedValues },
+                        success: function (data) {
+                            $("#total-price").html(data);
+
+                        }
+                    });
+
+            @*$(".my-checkbox:checked").each(function () {
+                selectedValues.push($(this).val());
+            });
+
+                if (selectedValues.length > 0) {
+                    $.ajax({
+                    url: '@Url.Action("DatHang", "ShoppingCart")',
+                     type: 'POST',
+                    data: { selectedValues: selectedValues},
+                    success: function (data) {
+                    }
+                });
+            }*@
         });
     });
 
@@ -411,7 +496,7 @@
 
         //});
 
-       
+
 
          @*$(document).ready(function () {
              $(".btn-up").click(function () {

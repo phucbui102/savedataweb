@@ -9,6 +9,7 @@ using PagedList;
 using System.Linq.Dynamic;
 using System.Linq.Expressions;
 using System.Net;
+using System.Data.Entity;
 
 namespace PBShop.Areas.Admin.Controllers
 {
@@ -34,47 +35,62 @@ namespace PBShop.Areas.Admin.Controllers
                           NameType = c.NameType,
                           Id_Type = c.ID
                       });
-            return View(LP.ToList());
+            return View( LP.ToList());
         }
+        public ActionResult ReloadData()
+        {
+            var LP = (from s in db.Products
+                      join c in db.Types on s.Id_Type equals c.ID
+                      select new GetProduct
 
+                      {
+                          ID = s.ID,
+                          Name = s.Name,
+                          Price = s.Price,
+                          Promotional_Price = s.Promotional_Price,
+                          Img = s.Img,
+                          Describe = s.Describe,
+                          DateAdded = s.DateAdded,
+                          NameType = c.NameType,
+                          Id_Type = c.ID
+                      });
+            return PartialView("_PartialData", LP.ToList());
+        }
 
         public ActionResult Create()
         {
-            ViewBag.Type = new SelectList(db.Types, "ID", "Nametype");
-            ViewBag.CategoryID = new SelectList(db.Products, "CategoryID", "CategoryName");
+            ViewBag.Id_Type = new SelectList(db.Types, "ID", "NameType");
+            ViewBag.Id_Promotional = new SelectList(db.Promotions, "ID", "ID");
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult Create([Bind(Include = "BookID,Title,AuthorID,Price,Images,CategoryID,Description,Published,ViewCount")] Product Product, HttpPostedFileBase Images)
+        public ActionResult Create([Bind(Include = "Name,Price,Promotional_Price,Img,Describe,Id_Type,Id_Promotional")] Product p, HttpPostedFileBase Img, FormCollection form)
         {
             if (ModelState.IsValid)
             {
-                try
-                {
-                    if (Images.ContentLength > 0)
+               
+
+                    if (Img.ContentLength > 0)
                     {
-                        string _FileName = Path.GetFileName(Images.FileName);
-                        string _path = Path.Combine(Server.MapPath("~/bookimages"), _FileName);
-                        Images.SaveAs(_path);
-                        Product.Img = _FileName;
+                        string _FileName = Path.GetFileName(Img.FileName);
+                        string _path = Path.Combine(Server.MapPath("~/Theme/assets/images/products"), _FileName);
+                        Img.SaveAs(_path);
+                        p.Img = _FileName;
                     }
-                    db.Products.Add(Product);
+                    p.DateAdded = DateTime.Today;
+                    db.Products.Add(p);
                     db.SaveChanges();
                     return RedirectToAction("Index");
-                }
-                catch
-                {
-                    ViewBag.Message = "không thành công!!";
-                }
+               
 
             }
 
-            ViewBag.Type = new SelectList(db.Types, "ID", "Nametype", Product.Id_Type);
-            ViewBag.CategoryID = new SelectList(db.Products, "CategoryID", "CategoryName", Product.ID);
-            return View(Product);
+            ViewBag.Id_Type = new SelectList(db.Types, "ID", "NameType", p.Id_Type);
+            ViewBag.Id_Promotional = new SelectList(db.Promotions, "ID", "ID", p.Id_Promotional);
+            return View(p);
         }
 
 
@@ -105,7 +121,15 @@ namespace PBShop.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
-            return PartialView("_DetailsPartial",Product);
+            return View("Details",Product);
+        }
+
+        public ActionResult Modals(int id)
+        {
+           
+            Product p = db.Products.Find(id);
+            
+            return PartialView("_PartialModal", p);
         }
         //public ActionResult Details(int id)
         //{
@@ -117,20 +141,84 @@ namespace PBShop.Areas.Admin.Controllers
         //    return PartialView("_DetailsPartial", details);
         //}
 
-        // POST: Book/Delete/5
-        [HttpPost, ActionName("Delete")]
+
+        // GET: Book/Edit/5
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Product product = db.Products.Find(id);
+            if (product == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.Id_Promotional = new SelectList(db.Promotions, "ID", "ID", product.Id_Promotional);
+            ViewBag.Id_Type = new SelectList(db.Types, "ID", "NameType", product.Id_Type);
+            return View(product);
+
+
+        }
+
+        // POST: Admin/Products/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult Edit([Bind(Include = "ID,Name,Price,Promotional_Price,Img,Describe,Id_Type,Id_Promotional,DateAdded,Rated")] Product product, HttpPostedFileBase Img, FormCollection form)
+        {
+            if (ModelState.IsValid)
+            {
+                if (Img != null)
+                {
+                    string _FileName = Path.GetFileName(Img.FileName);
+                    string _path = Path.Combine(Server.MapPath("~/Theme/assets/images/products"), _FileName);
+                    Img.SaveAs(_path);
+                    product.Img = _FileName;
+                    // get Path of old image for deleting it
+                    _path = Path.Combine(Server.MapPath("~/Theme/assets/images/products"), form["oldimage"]);
+                    if (System.IO.File.Exists(_path))
+                        System.IO.File.Delete(_path);
+
+                }
+                else
+                    product.Img = form["oldimage"];
+               
+
+                db.Entry(product).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+                //db.Entry(product).State = EntityState.Modified;
+                //db.SaveChanges();
+                //return RedirectToAction("Index");
+            }
+
+
+
+
+            ViewBag.Id_Promotional = new SelectList(db.Promotions, "ID", "ID", product.Id_Promotional);
+            ViewBag.Id_Type = new SelectList(db.Types, "ID", "NameType", product.Id_Type);
+            return View(product);
+
+           
+        }
+
+
+        // POST: Book/Delete/5
+        [HttpPost]
+        public ActionResult Delete(int id)
         {
             Product Product = db.Products.Find(id);
             db.Products.Remove(Product);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return Json(new { success = true, message = "Item deleted successfully" });
         }
 
         [HttpGet]
         public ActionResult Login()
         {
+
             return View();
 
         }
@@ -138,26 +226,20 @@ namespace PBShop.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Login(FormCollection collection)
         {
-            var sEmail = collection["Email"];
-            var sPassword = collection["Password"];
-            if (String.IsNullOrEmpty(sEmail))
+         
+            var sPassword = collection["password"];
+            
+            if(!String.IsNullOrEmpty(sPassword))
             {
-                ViewData["err1"] = "Bạn chưa nhập Email";
-            }
-            else if (String.IsNullOrEmpty(sPassword))
-            {
-                ViewData["err2"] = "Bạn chưa nhập mật khẩu";
-            }
-            else
-            {
-                Customer kh = db.Customers.SingleOrDefault(n => n.Email == sEmail && n.Password == sPassword);
-                if (kh != null)
+                //Admin kh = db.Admin.SingleOrDefault(n => n.Email == sEmail && n.Password == sPassword);
+                var admin = db.Admins.SingleOrDefault(n => n.Pass == sPassword);
+                if (admin != null)
                 {
 
-                    Session["NameCustomers"] = kh.Name;
-                    Session["EmailCustomers"] = kh.Email;
+                    Session["TKAdmin"] = admin;
+                   
                     ViewBag.ThongBao = "Chúc mừng đăng nhập thành công";
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Index","Home");
                 }
                 else
                 {

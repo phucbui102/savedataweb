@@ -25,14 +25,16 @@ namespace PBShop.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Admin> Admins { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<Promotion> Promotions { get; set; }
         public virtual DbSet<ShoppingCart> ShoppingCarts { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Type> Types { get; set; }
+        public virtual DbSet<DetailsOder> DetailsOders { get; set; }
         public virtual DbSet<ShoppingCartDetail> ShoppingCartDetails { get; set; }
         public virtual DbSet<Type_Details> Type_Details { get; set; }
-        public virtual DbSet<Order> Orders { get; set; }
     }
 }
