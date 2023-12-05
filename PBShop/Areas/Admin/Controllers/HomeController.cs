@@ -18,7 +18,7 @@ namespace PBShop.Areas.Admin.Controllers
     {
         PBShopEntities db = new PBShopEntities();
         // GET: Admin/Home
-        public ActionResult Index()
+        public ActionResult Index(String search, string sortProperty, string sortOrder)
         {
             var LP = (from s in db.Products
                       join c in db.Types on s.Id_Type equals c.ID
@@ -35,6 +35,18 @@ namespace PBShop.Areas.Admin.Controllers
                           NameType = c.NameType,
                           Id_Type = c.ID
                       });
+            if (!String.IsNullOrEmpty(search))
+            {
+                search = search.ToLower();
+                LP = LP.Where(b => b.Name.ToLower().Contains(search));
+            }
+            ViewBag.SortOrder = String.IsNullOrEmpty(sortOrder) ? "desc" : "";
+            if (String.IsNullOrEmpty(sortProperty)) sortProperty = "Name";
+
+            if (sortOrder == "desc")
+                LP = LP.OrderBy(sortProperty + " desc");
+            else
+                LP = LP.OrderBy(sortProperty);
             return View( LP.ToList());
         }
         public ActionResult ReloadData()
@@ -57,6 +69,32 @@ namespace PBShop.Areas.Admin.Controllers
             return PartialView("_PartialData", LP.ToList());
         }
 
+
+        //public ActionResult FindData(String search)
+        //{
+
+        //    var LP = (from s in db.Products
+        //              join c in db.Types on s.Id_Type equals c.ID
+        //              select new GetProduct
+
+        //              {
+        //                  ID = s.ID,
+        //                  Name = s.Name,
+        //                  Price = s.Price,
+        //                  Promotional_Price = s.Promotional_Price,
+        //                  Img = s.Img,
+        //                  Describe = s.Describe,
+        //                  DateAdded = s.DateAdded,
+        //                  NameType = c.NameType,
+        //                  Id_Type = c.ID
+        //              });
+        //    if (!String.IsNullOrEmpty(search))
+        //    {
+        //        search = search.ToLower();
+        //        LP = LP.Where(b => b.Name.ToLower().Contains(search));
+        //    }
+        //    return PartialView("_PartialData", LP.ToList());
+        //}
         public ActionResult Create()
         {
             ViewBag.Id_Type = new SelectList(db.Types, "ID", "NameType");
@@ -80,6 +118,7 @@ namespace PBShop.Areas.Admin.Controllers
                         Img.SaveAs(_path);
                         p.Img = _FileName;
                     }
+                    p.Rated = 0;
                     p.DateAdded = DateTime.Today;
                     db.Products.Add(p);
                     db.SaveChanges();

@@ -204,6 +204,7 @@
     <Compile Include="Models\Type_Details.cs">
       <DependentUpon>PBShop.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\VnPayLibrary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

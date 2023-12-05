@@ -19,6 +19,10 @@
     .ms-n5 {
         margin-left: -40px;
     }
+    .Linksort {
+        text-decoration: none;
+        color: #212529;
+    }
     /* tbody tr{
         height: 100px;
         width:100%;
@@ -67,10 +71,13 @@
         </div>
 
         <div class="col-md-9 ">
-            <form class="d-flex col-md-5 float-end">
-                <input class="form-control me-2" type="search" placeholder="Tìm Kiếm" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
+            @using (Html.BeginForm("Index", "Home", new { Area = "Admin" }, FormMethod.Post, new { @class = "d-flex col-md-5 float-end" }))
+            {
+                <input class="form-control me-2 search-input" id="sip" name="search" type="text" placeholder="Nhập tên sản phẩm..." aria-label="Search">
+                <button class="btn btn-outline-success search-btn" type="submit">Tìm</button>
+            }
+            @*<form class="d-flex col-md-5 float-end">
+            </form>*@
         </div>
     </div>
     <div class="table__container">
@@ -80,18 +87,21 @@
                     <th scope="col">
                         @*@Html.DisplayNameFor(model => model.ID)*@
                         ID
+
                     </th>
                     <th scope="col">
                         @*@Html.DisplayNameFor(model => model.Name)*@
-                        Tên
+                       
+                        @Html.ActionLink("Tên", "Index", new { sortProperty = "Name", sortOrder = ViewBag.SortOrder },new { @class = "Linksort"})
                     </th>
                     <th scope="col">
                         @*@Html.DisplayNameFor(model => model.Price)*@
-                        Giá
+                        @Html.ActionLink("Giá", "Index", new { sortProperty = "Price", sortOrder = ViewBag.SortOrder }, new { @class = "Linksort" })
                     </th>
                     <th scope="col">
                         @*@Html.DisplayNameFor(model => model.Price)*@
-                        Giá Khuyến Mãi
+                       
+                        @Html.ActionLink("Giá Khuyến Mãi", "Index", new { sortProperty = "Promotional_Price", sortOrder = ViewBag.SortOrder }, new { @class = "Linksort" })
                     </th>
                     <th scope="col">
                         @*@Html.DisplayNameFor(model => model.Img)*@
@@ -171,8 +181,42 @@
                      loadd();
                             }
                 });
-    };
-        
+            };
+
+
+
+            function Findata() {
+             $.ajax({
+            url: '@Url.Action("FindData", "Home")',
+            type: 'POST',
+                 data: { id: id },
+                 success: function (data){
+
+                     loadd();
+                            }
+                });
+            };
+
+
+            // function Findata() {
+            //     alert("test");
+            //};
+
+
+            //$('.search-btn').click(function () {
+            //    var search = $("#sip").val();
+            //    alert("heheh")
+                @*$.ajax({
+            url: '@Url.Action("FindData", "Home")',
+            type: 'GET',
+                    data: { search: search },
+                    success: function (data) {
+                        alert("hehejeh");
+                     $(".table__container").html(data);
+                            }
+                });*@
+            });
+
          function loadd() {
              $.ajax({
             url: '@Url.Action("ReloadData", "Home")',
